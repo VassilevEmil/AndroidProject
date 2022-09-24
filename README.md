@@ -9,7 +9,7 @@ The news tab will display article headlines that will link to the full article -
 User can see his total crypto portfolio net worth in the portfolio holdings tab, and he can add crypto holdings - select a cryptocurrency from the
 list and enter the amount. Last but not least, each cryptocurrency's price can be seen in real-time.
 
-  User stories:
+# User stories:
 
 - [ ] As a user I want to be able to check the latest crypto prices.
 - [ ] As a user I want to be able to read the latest crypto news.
@@ -21,7 +21,7 @@ list and enter the amount. Last but not least, each cryptocurrency's price can b
 - [ ] As a user I am interested only on top 10 cryptos in the market.
 
 
-  Non-Functional requirements:
+# Non-Functional requirements:
 
 - [ ] As a user I want to have an easy way to navigate through the app.
 - [ ] As a user I want to be able to change the theme on my app. 
