@@ -1,6 +1,6 @@
 package com.example.androidproject.ViewModel.NewsVM;
 
-import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
 
-public class NewsViewModel extends Fragment {
+public class NewsViewModel extends ViewModel {
 }

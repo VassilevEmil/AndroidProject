@@ -1,4 +1,6 @@
 package com.example.androidproject.UI.News;
 
-public class NewsFragment {
+import androidx.fragment.app.Fragment;
+
+public class NewsFragment extends Fragment {
 }
