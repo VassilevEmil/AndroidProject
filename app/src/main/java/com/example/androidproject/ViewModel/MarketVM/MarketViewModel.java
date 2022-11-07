@@ -1,4 +1,4 @@
-package com.example.androidproject.UI.Market;
+package com.example.androidproject.ViewModel.MarketVM;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

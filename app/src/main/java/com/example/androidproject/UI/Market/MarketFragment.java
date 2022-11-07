@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.androidproject.R;
+import com.example.androidproject.ViewModel.MarketVM.MarketViewModel;
 import com.example.androidproject.databinding.FragmentMarketBinding;
 
 public class MarketFragment extends Fragment {
