@@ -1,4 +1,4 @@
-package com.example.androidproject.Model.NewsModel.DAO;
+package com.example.androidproject.DAO;
 
 import androidx.lifecycle.LiveData;
 

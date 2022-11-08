@@ -5,6 +5,11 @@ import com.example.androidproject.Model.utils.Credentials;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/*
+singleton pattern for retrofit api call
+ */
+
+
 public class NewsServiceGenerator {
 
     private static Retrofit.Builder retrofitBuilder = new Retrofit.Builder().baseUrl(Credentials.BASE_URL_NEWS)
