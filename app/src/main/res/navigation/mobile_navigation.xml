@@ -11,4 +11,10 @@
         android:label="Market"
         tools:layout="@layout/fragment_market" />
 
+    <fragment
+        android:id="@+id/navigation_news"
+        android:name="com.example.androidproject.UI.News.NewsFragment"
+        android:label="News"
+        tools:layout="@layout/fragment_news" />
+
 </navigation>
