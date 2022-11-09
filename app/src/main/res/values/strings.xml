@@ -2,4 +2,11 @@
     <string name="app_name">Android Project</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="textview">TextView</string>
+    <string name="rank">#</string>
+    <string name="COIN">coin</string>
+    <string name="PRICE">PRICE</string>
+    <string name="price">price</string>
+    <string name="percentage">24H</string>
+    <string name="market_cap">market cap</string>
 </resources>

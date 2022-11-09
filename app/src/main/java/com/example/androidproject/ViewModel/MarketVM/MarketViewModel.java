@@ -4,18 +4,20 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.androidproject.Entities.Market.Market;
+import com.example.androidproject.Model.Market.MarketRepository;
+
+import java.util.List;
+
 public class MarketViewModel extends ViewModel {
-    private MutableLiveData<Integer> name;
+
+    private final MarketRepository repository;
 
     public MarketViewModel(){
-        name = new MutableLiveData<>(0);
+        repository = MarketRepository.getInstance();
     }
 
-    public void Increment(){
-        name.postValue(name.getValue()+1);
-    }
-
-    public LiveData<Integer> getText(){
-        return name;
+    public LiveData<List<Market>> getMarketData(){
+        return repository.getMarketData();
     }
 }
