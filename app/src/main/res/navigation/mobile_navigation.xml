@@ -11,4 +11,10 @@
         android:label="Market"
         tools:layout="@layout/fragment_market" />
 
+    <fragment
+        android:id="@+id/navigation_portfolio"
+        android:name="com.example.androidproject.UI.Wallet.WalletFragment"
+        android:label="Wallet"
+        tools:layout="@layout/fragment_wallet" />
+
 </navigation>
