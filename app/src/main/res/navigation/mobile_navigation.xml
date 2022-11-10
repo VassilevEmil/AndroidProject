@@ -17,4 +17,11 @@
         android:label="News"
         tools:layout="@layout/fragment_news" />
 
+      <fragment
+        android:id="@+id/navigation_portfolio"
+        android:name="com.example.androidproject.UI.Wallet.WalletFragment"
+        android:label="Wallet"
+        tools:layout="@layout/fragment_wallet" />
+
+
 </navigation>
