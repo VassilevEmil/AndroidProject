@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidproject.Entities.NewsModel;
@@ -21,6 +22,7 @@ import com.example.androidproject.UI.Responses.NewsResponse;
 import com.example.androidproject.ViewModel.NewsVM.NewsViewModel;
 import com.example.androidproject.databinding.FragmentNewsBinding;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -38,24 +40,31 @@ public class NewsFragment extends Fragment {
     NewsAdapter adapter;
 
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        viewModel = new ViewModelProvider(this).get(NewsViewModel.class);
 
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        viewModel = new ViewModelProvider(this).get(NewsViewModel.class);
         binding = FragmentNewsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
         recyclerView = root.findViewById(R.id.recycleviewofNews);
+        recyclerView.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
 
         viewModel.getNews().observe(getViewLifecycleOwner(), category ->{
-            textView.setText(String.valueOf(category));
+          //   textView.setText(String.valueOf(category));
 
+//            List<NewsModel> newsModels = new ArrayList<>();
+//            newsModels.add(new NewsModel(newsModels.))
+
+            adapter = new NewsAdapter(getContext(), newsModel);
+            recyclerView.setAdapter(adapter);
+
+                    findNews();
         }
 
                 );
 
-        findNews();
+
+
+
 
         return root;
 
