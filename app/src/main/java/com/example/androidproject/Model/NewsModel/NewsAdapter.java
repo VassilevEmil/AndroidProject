@@ -3,6 +3,7 @@ package com.example.androidproject.Model.NewsModel;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,12 +18,15 @@ import com.bumptech.glide.Glide;
 import com.example.androidproject.Entities.NewsModel;
 import com.example.androidproject.R;
 
+import java.io.InputStream;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     Context context;
-    List<NewsModel> modelList;
+    List<NewsModel> modelList = new ArrayList<>();
     NewsRepository newsRepository;
 
     public NewsAdapter(Context context, List<NewsModel> modelList) {
@@ -38,26 +42,34 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         return new ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(NewsAdapter.ViewHolder viewHolder, @SuppressLint("RecyclerView") int i) {
 
 
         // method for opening a new intent when clicking to see a news
 
-        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, webView.class);
-                intent.putExtra("url", modelList.get(i).getUrl());
-                context.startActivity(intent);
-            }
-        });
+        //        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(context, webView.class);
+//                //intent.putExtra("url", modelList.get(i).getUrl());
+//                context.startActivity(intent);
+//            }
+//        });
+
 
         viewHolder.mtime.setText("Published at:-" + modelList.get(i).getPubDate());
         viewHolder.mheading.setText(modelList.get(i).getTitle());
-        viewHolder.mcreator.setText(modelList.get(i).getCreator());
+        viewHolder.mcreator.setText(modelList.get(i).getCreator().get(0));
         viewHolder.mcontent.setText(modelList.get(i).getContent());
-        Glide.with(context).load(modelList.get(i).getImage_url()).into(viewHolder.imageView);
+
+
+        // problems with the context
+
+//        Glide.with(viewHolder.itemView.getContext())
+//              .load(modelList.get(i).getImage_url()).into(viewHolder.imageView);
+
 
     }
 
