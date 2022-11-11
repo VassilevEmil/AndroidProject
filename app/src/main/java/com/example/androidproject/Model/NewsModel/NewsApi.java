@@ -10,7 +10,7 @@ public interface NewsApi {
 
     // search news
 
-    @GET
+    @GET("news")
     Call<NewsResponse> searchNews(
             @Query("apikey")String apiKey,
             @Query("q") String category,

@@ -24,11 +24,11 @@ public class NewsRepository {
         searchedNews = new MutableLiveData<>();
     }
 
-    public LiveData<List<NewsModel>> getSearchedNews(){
+    public MutableLiveData<List<NewsModel>> getSearchedNews(){
         return searchedNews;
     }
 
-    public static NewsRepository getInstance() {
+    public static synchronized NewsRepository getInstance() {
 
         if (instance == null){
             instance = new NewsRepository();
@@ -43,13 +43,15 @@ public class NewsRepository {
             @Override
             public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
                 if (response.isSuccessful()){
-                    searchedNews.setValue((List<NewsModel>) response.body().getNews());
+                    searchedNews.setValue(response.body().getNews());
+                    System.out.println(response.body().getNews());
                 }
             }
 
             @Override
             public void onFailure(Call<NewsResponse> call, Throwable t) {
                 Log.i("Retrofit", "Exception from NewsRepository class... check it");
+                System.out.println(t.getMessage());
             }
         });
     }

@@ -34,9 +34,9 @@ public class NewsFragment extends Fragment {
 
     private FragmentNewsBinding binding;
     private NewsViewModel viewModel;
-    private RecyclerView recyclerView;
+    RecyclerView recyclerView;
     TextView textView;
-    List<NewsModel> newsModel;
+    List<NewsModel> newsModel = new ArrayList<>();
     NewsAdapter adapter;
 
 
@@ -45,24 +45,18 @@ public class NewsFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(NewsViewModel.class);
         binding = FragmentNewsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
         recyclerView = root.findViewById(R.id.recycleviewofNews);
-        recyclerView.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
+        recyclerView.hasFixedSize();
 
-        viewModel.getNews().observe(getViewLifecycleOwner(), category ->{
-          //   textView.setText(String.valueOf(category));
-
-//            List<NewsModel> newsModels = new ArrayList<>();
-//            newsModels.add(new NewsModel(newsModels.))
-
-            adapter = new NewsAdapter(getContext(), newsModel);
+        viewModel.getNews();
+        viewModel.getSearchedNews().observeForever(newsList->{
+            adapter = new NewsAdapter(binding.getRoot().getContext(),newsList);
             recyclerView.setAdapter(adapter);
-
-                    findNews();
-        }
-
-                );
+        });
 
 
+        recyclerView.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
 
 
 
@@ -75,15 +69,14 @@ public class NewsFragment extends Fragment {
             @Override
             public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
                 if (response.isSuccessful()){
-                    newsModel.add(response.body().getNews());
-
-
+                    //newsModel.add(response.body().getNews());
+                    System.out.println("\n something????"+response.body());
                 }
             }
 
             @Override
             public void onFailure(Call<NewsResponse> call, Throwable t) {
-
+                System.out.println(t.getMessage());
             }
         });
     }

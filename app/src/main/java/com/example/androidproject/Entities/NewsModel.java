@@ -4,11 +4,14 @@ package com.example.androidproject.Entities;
     // Model class for the news
 
 
+import java.util.ArrayList;
+
 public class NewsModel {
 
-    private String title, creator, description, content, pubDate, image_url, category, url;
+    private String title, description, content, pubDate, image_url, url;
+    private ArrayList<String> creator, category;
 
-    public NewsModel(String title, String creator, String description, String content, String pubDate, String image_url, String category, String url) {
+    public NewsModel(String title,ArrayList<String> creator, String description, String content, String pubDate, String image_url, ArrayList<String> category, String url) {
         this.title = title;
         this.creator = creator;
         this.description = description;
@@ -23,7 +26,7 @@ public class NewsModel {
         return title;
     }
 
-    public String getCreator() {
+    public ArrayList<String> getCreator() {
         return creator;
     }
 
@@ -43,7 +46,7 @@ public class NewsModel {
         return image_url;
     }
 
-    public String getCategory() {
+    public ArrayList<String> getCategory() {
         return category;
     }
 
@@ -55,9 +58,6 @@ public class NewsModel {
         this.title = title;
     }
 
-    public void setCreator(String creator) {
-        this.creator = creator;
-    }
 
     public void setDescription(String description) {
         this.description = description;
@@ -75,11 +75,17 @@ public class NewsModel {
         this.image_url = image_url;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public String toString() {
+        return "NewsModel{" +
+
+                ", image_url='" + image_url + '\'' +
+                ", url='" + url + '\'' +
+                '}';
     }
 }
