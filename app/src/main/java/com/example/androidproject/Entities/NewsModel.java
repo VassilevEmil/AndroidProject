@@ -83,9 +83,14 @@ public class NewsModel {
     @Override
     public String toString() {
         return "NewsModel{" +
-
+                "title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", content='" + content + '\'' +
+                ", pubDate='" + pubDate + '\'' +
                 ", image_url='" + image_url + '\'' +
                 ", url='" + url + '\'' +
+                ", creator=" + creator +
+                ", category=" + category +
                 '}';
     }
 }

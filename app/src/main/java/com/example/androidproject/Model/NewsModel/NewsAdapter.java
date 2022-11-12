@@ -46,7 +46,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(NewsAdapter.ViewHolder viewHolder, @SuppressLint("RecyclerView") int i) {
 
-
         // method for opening a new intent when clicking to see a news
 
         //        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -58,14 +57,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 //            }
 //        });
 
-
         viewHolder.mtime.setText("Published at:-" + modelList.get(i).getPubDate());
         viewHolder.mheading.setText(modelList.get(i).getTitle());
         viewHolder.mcreator.setText(modelList.get(i).getCreator().get(0));
         viewHolder.mcontent.setText(modelList.get(i).getContent());
 
-
         // problems with the context
+        // ask kasper on monday
 
 //        Glide.with(viewHolder.itemView.getContext())
 //              .load(modelList.get(i).getImage_url()).into(viewHolder.imageView);
