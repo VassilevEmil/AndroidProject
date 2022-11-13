@@ -56,4 +56,8 @@ public class UserRepository {
     public LiveData<FirebaseUser> getCurrentUser(){
         return userDAO.getCurrentUser();
     }
+
+    public void loginAccount(Activity activity, String email, String password){
+        userDAO.loginAccount(activity,email,password);
+    }
 }
