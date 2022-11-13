@@ -6,6 +6,7 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.example.androidproject.Entities.wallet.Transaction;
 import com.example.androidproject.Entities.wallet.User;
@@ -15,7 +16,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
-public class WalletViewModel extends AndroidViewModel {
+public class WalletViewModel extends AndroidViewModel  {
     UserRepository userRepository;
     TransactionRepository transactionRepository;
 
@@ -24,6 +25,8 @@ public class WalletViewModel extends AndroidViewModel {
         userRepository = UserRepository.getInstance(app);
         transactionRepository = TransactionRepository.getInstance(app);
     }
+
+
 
     public void registerATransaction(String userUID,Transaction transaction)
     {

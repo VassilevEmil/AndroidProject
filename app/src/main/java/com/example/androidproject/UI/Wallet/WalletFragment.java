@@ -1,6 +1,7 @@
 package com.example.androidproject.UI.Wallet;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -31,6 +32,7 @@ import com.github.mikephil.charting.utils.MPPointF;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class WalletFragment extends Fragment {
     private FragmentWalletBinding binding;
@@ -72,25 +74,29 @@ public class WalletFragment extends Fragment {
             }
         });
 
+        viewModel.getUser(userID.getText().toString()).observeForever(user->{
+            totalAmmount.setText(String.valueOf(user.getWalletBallanceUSD()));
+        });
+
         //populate transactions list
         viewModel.getTransactions(userID.getText().toString()).observeForever(transactionsList -> {
             adapter = new WalletAdapter(binding.getRoot().getContext(),transactionsList);
 
             float amount = 0.0f;
-
+            setUpGraph(transactionsList);
             for(Transaction item:transactionsList)
             {
                 if(item.isBuy()) {
                     amount += item.getAmount();
+
                 }else{
                     amount -= item.getAmount();
                 }
             }
 
 
-            totalAmmount.setText(String.valueOf(amount));
 
-
+            //viewModel.updateUser(local);
             recyclerView.setAdapter(adapter);
         });
 
@@ -113,22 +119,23 @@ public class WalletFragment extends Fragment {
         });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
-        setUpGraph();
 
         return root;
     }
 
-    private void setUpGraph(){
-
-        long x =10;
+    private void setUpGraph(List<Transaction> transactionsList){
 
         List<PieEntry> pieChartList = new ArrayList<>();
         List<Integer> colorsList = new ArrayList<>();
 
-        pieChartList.add(new PieEntry(x,"X"));
-        colorsList.add(getResources().getColor(R.color.purple_200));
-        pieChartList.add(new PieEntry(5,"Y"));
-        colorsList.add(getResources().getColor(R.color.black));
+        for(Transaction item: transactionsList){
+            if(item.isBuy()){
+                pieChartList.add(new PieEntry(item.getAmount(),item.getCryptoName()));
+                Random rnd = new Random();
+                int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+                colorsList.add(color);
+            }
+        }
 
         PieDataSet pieDataSet = new PieDataSet(pieChartList,"");
         pieDataSet.setColors(colorsList);
@@ -163,7 +170,7 @@ public class WalletFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewModel.getUser(userID.getText().toString()).observe(getViewLifecycleOwner(), user -> {
+                viewModel.getUser(userID.getText().toString()).observeForever(user -> {
                     Transaction localTr = new Transaction();
                     localTr.setNote(note.getText().toString());
                     localTr.setBuy(true);
@@ -205,7 +212,7 @@ public class WalletFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewModel.getUser(userID.getText().toString()).observe(getViewLifecycleOwner(), user -> {
+                viewModel.getUser(userID.getText().toString()).observeForever(user -> {
                     Transaction localTr = new Transaction();
                     localTr.setNote(note.getText().toString());
                     localTr.setBuy(false);

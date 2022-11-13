@@ -107,12 +107,12 @@ public class UserDAO implements IUserDAO{
 
     @Override
     public void updateUser(User newUser) {
-        DocumentReference docRef = firebaseDatabase.collection(collectionPath).document(newUser.getUid());
-        //updates fields
-        docRef.update("email",newUser.getEmail());
-        docRef.update("lastName",newUser.getLastName());
-        docRef.update("firstName",newUser.getFirstName());
-        docRef.update("walletBallanceUSD",newUser.getWalletBallanceUSD());
+            DocumentReference docRef = firebaseDatabase.collection(collectionPath).document(newUser.getUid());
+            //updates fields
+            docRef.update("email",newUser.getEmail());
+            docRef.update("lastName",newUser.getLastName());
+            docRef.update("firstName",newUser.getFirstName());
+            docRef.update("walletBallanceUSD",newUser.getWalletBallanceUSD());
     }
 
     @Override
