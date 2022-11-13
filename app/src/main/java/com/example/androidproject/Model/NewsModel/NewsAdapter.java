@@ -59,7 +59,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
         viewHolder.mtime.setText("Published at:-" + modelList.get(i).getPubDate());
         viewHolder.mheading.setText(modelList.get(i).getTitle());
-        viewHolder.mcreator.setText(modelList.get(i).getCreator().get(0));
+
+        // sometimes run sometimes doesnt => ask kasper
+
+       //  viewHolder.mcreator.setText(modelList.get(i).getCreator().get(0));
         viewHolder.mcontent.setText(modelList.get(i).getContent());
 
         // problems with the context
