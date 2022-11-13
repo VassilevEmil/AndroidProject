@@ -144,6 +144,25 @@ public class UserDAO implements IUserDAO{
         return userMutableLiveData;
     }
 
+    @Override
+    public void loginAccount(Activity activity, String email, String password) {
+        try{
+            firebaseAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(activity, task -> {
+                        if (task.isSuccessful()) {
+                            //Sign in success
+                            Log.d(TAG, "signInUserWithEmail:success");
+                        } else {
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                        }
+                    });
+        }
+        catch (Exception e)
+        {
+            Log.d(TAG,"Exception: " + e.getMessage());
+        }
+    }
+
     private void createUser(String uid, User userParam) {
 
         User user = new User();

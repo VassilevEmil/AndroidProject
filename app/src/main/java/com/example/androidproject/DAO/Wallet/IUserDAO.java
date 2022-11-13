@@ -15,4 +15,5 @@ public interface IUserDAO {
     MutableLiveData<User> getUser(String uid);
     LiveData<FirebaseUser> getCurrentUser();
     MutableLiveData<User> getUserModal();
+    void loginAccount(Activity activity, String email, String password);
 }

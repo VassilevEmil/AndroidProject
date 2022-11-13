@@ -1,6 +1,7 @@
 package com.example.androidproject.UI.Wallet;
 
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -77,6 +78,8 @@ public class WalletFragment extends Fragment {
             public void onChanged(FirebaseUser firebaseUser) {
                 if(firebaseUser != null){
                     userID.setText(firebaseUser.getUid());
+                }else{
+                    viewModel.loginAccount((Activity) getView().getContext(),"goformusicro@gmail.com","test1234567");
                 }
             }
         });

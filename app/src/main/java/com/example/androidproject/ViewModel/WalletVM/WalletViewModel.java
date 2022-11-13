@@ -63,4 +63,8 @@ public class WalletViewModel extends AndroidViewModel  {
     {
         userRepository.updateUser(user);
     }
+
+    public void loginAccount(Activity activity, String email, String password){
+        userRepository.loginAccount(activity, email, password);
+    }
 }
