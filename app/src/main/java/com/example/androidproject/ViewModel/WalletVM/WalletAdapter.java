@@ -5,21 +5,16 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+
 import android.widget.TextView;
 
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.androidproject.Entities.wallet.Transaction;
-import com.example.androidproject.Model.NewsModel.NewsAdapter;
 import com.example.androidproject.R;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import lombok.NonNull;
 
 public class WalletAdapter extends RecyclerView.Adapter<WalletAdapter.ViewHolder> {
     Context context;

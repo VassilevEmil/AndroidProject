@@ -8,7 +8,7 @@
 
 
     <EditText
-        android:id="@+id/portfolio_buy_note"
+        android:id="@+id/portfolio_sell_note"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:drawablePadding="16dp"
@@ -24,7 +24,7 @@
 
 
     <EditText
-        android:id="@+id/portfolio_buy_cryptoName"
+        android:id="@+id/portfolio_sell_cryptoName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -35,11 +35,11 @@
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/portfolio_buy_note"
+        app:layout_constraintTop_toBottomOf="@+id/portfolio_sell_note"
         tools:ignore="MissingConstraints" />
 
     <EditText
-        android:id="@+id/portfolio_buy_amount"
+        android:id="@+id/portfolio_sell_amount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -52,26 +52,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/portfolio_buy_cryptoName"
+        app:layout_constraintTop_toBottomOf="@+id/portfolio_sell_cryptoName"
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/portfolio_buy_popupSaveButton"
+        android:id="@+id/portfolio_sell_popupSaveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="76dp"
-        android:text="BUY"
+        android:text="Save"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/portfolio_buy_amount"
+        app:layout_constraintTop_toBottomOf="@+id/portfolio_sell_amount"
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/portfolio_buy_popupcancelButton"
+        android:id="@+id/portfolio_sell_popupcancelButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cancel"
-        app:layout_constraintEnd_toStartOf="@+id/portfolio_buy_popupSaveButton"
+        app:layout_constraintEnd_toStartOf="@+id/portfolio_sell_popupSaveButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/portfolio_buy_amount"
+        app:layout_constraintTop_toBottomOf="@+id/portfolio_sell_amount"
         tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>

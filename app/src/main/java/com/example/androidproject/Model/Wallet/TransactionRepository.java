@@ -41,8 +41,8 @@ public class TransactionRepository {
     public void updateTransaction(Transaction newTransaction){
         transactionsDAO.updateTransaction(newTransaction);
     }
-    public MutableLiveData<Transaction> getTransaction(String uid){
-        return transactionsDAO.getTransaction(uid);
+    public MutableLiveData<List<Transaction>> getTransactions(String uid){
+        return transactionsDAO.getTransactions(uid);
     }
     public MutableLiveData<List<Transaction>> getTransactionModal(){
         return transactionsDAO.getTransactionModal();

@@ -14,6 +14,6 @@ public interface ITransactionsDAO {
     void addTransaction(String userUID,Transaction transaction);
     void removeTransaction(Transaction transaction);
     void updateTransaction(Transaction newTransaction);
-    MutableLiveData<Transaction> getTransaction(String uid);
+    MutableLiveData<List<Transaction>> getTransactions(String uid);
     MutableLiveData<List<Transaction>> getTransactionModal();
 }

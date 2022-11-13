@@ -10,11 +10,16 @@ import androidx.lifecycle.MutableLiveData;
 
 
 import com.example.androidproject.Entities.wallet.Transaction;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,7 +39,7 @@ public class TransactionsDAO implements ITransactionsDAO{
         this.app = app;
 
 
-        transactionsMutableList=new MutableLiveData<>();
+        transactionsMutableList=new MutableLiveData<>(new ArrayList<>());
 
         firebaseDatabase = FirebaseFirestore.getInstance();
     }
@@ -49,6 +54,8 @@ public class TransactionsDAO implements ITransactionsDAO{
 
     @Override
     public void addTransaction(String userUID,Transaction transaction) {
+        if(userUID==null) return;
+
         Transaction local = new Transaction();
         local.setUid(transaction.getUid());
         local.setAmount(transaction.getAmount());
@@ -72,6 +79,7 @@ public class TransactionsDAO implements ITransactionsDAO{
                         Log.w(TAG, "Error writing the transaction", e);
                     }
                 });
+
     }
 
 
@@ -86,8 +94,24 @@ public class TransactionsDAO implements ITransactionsDAO{
     }
 
     @Override
-    public MutableLiveData<Transaction> getTransaction(String uid) {
-        return null;
+    public MutableLiveData<List<Transaction>> getTransactions(String uid) {
+        firebaseDatabase.collection(collectionPath).whereEqualTo("userUID",uid).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<Transaction> local = new ArrayList<>();
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Log.d(TAG, document.getId() + " => " + document.getData());
+                        Transaction localtr = document.toObject(Transaction.class);
+                        local.add(localtr);
+                    }
+                    transactionsMutableList.postValue(local);
+                } else {
+                    Log.d(TAG, "Error getting documents: ", task.getException());
+                }
+            }
+        });
+        return transactionsMutableList;
     }
 
     @Override

@@ -7,7 +7,7 @@ public class Transaction {
     private String note;
     private String cryptoName;
     private String date;
-    private double amount;
+    private float amount;
     private boolean buy;
     private String userUID;
 
@@ -15,7 +15,7 @@ public class Transaction {
         uid = UUID.randomUUID().toString();
     }
 
-    public Transaction(String note, String cryptoName,String date, double amount, boolean buy, String userUID) {
+    public Transaction(String note, String cryptoName,String date, float amount, boolean buy, String userUID) {
         this.uid = UUID.randomUUID().toString();
         this.note = note;
         this.cryptoName = cryptoName;
@@ -61,7 +61,7 @@ public class Transaction {
         return uid;
     }
 
-    public double getAmount() {
+    public float getAmount() {
         return amount;
     }
 
@@ -73,7 +73,7 @@ public class Transaction {
         this.uid = uid;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(float amount) {
         this.amount = amount;
     }
 

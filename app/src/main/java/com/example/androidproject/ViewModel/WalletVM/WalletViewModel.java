@@ -13,6 +13,8 @@ import com.example.androidproject.Model.Wallet.TransactionRepository;
 import com.example.androidproject.Model.Wallet.UserRepository;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.List;
+
 public class WalletViewModel extends AndroidViewModel {
     UserRepository userRepository;
     TransactionRepository transactionRepository;
@@ -31,6 +33,10 @@ public class WalletViewModel extends AndroidViewModel {
     public void registerAccount(Activity activity, User user, String password)
     {
         userRepository.registerAccount(activity,user,password);
+    }
+
+    public MutableLiveData<List<Transaction>> getTransactions(String userUID){
+        return transactionRepository.getTransactions(userUID);
     }
 
     public MutableLiveData<User> getUser(String uid)
