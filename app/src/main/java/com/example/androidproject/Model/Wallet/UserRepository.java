@@ -3,15 +3,18 @@ package com.example.androidproject.Model.Wallet;
 import android.app.Activity;
 import android.app.Application;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.androidproject.DAO.Wallet.IUserDAO;
 import com.example.androidproject.DAO.Wallet.UserDAO;
 import com.example.androidproject.Entities.wallet.User;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class UserRepository {
     private static UserRepository instance;
-    private static UserDAO userDAO;
+    private static IUserDAO userDAO;
 
 
     private UserRepository(Application app) {
@@ -48,5 +51,9 @@ public class UserRepository {
     public void updateUser(User user)
     {
         userDAO.updateUser(user);
+    }
+
+    public LiveData<FirebaseUser> getCurrentUser(){
+        return userDAO.getCurrentUser();
     }
 }

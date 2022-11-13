@@ -11,39 +11,26 @@ public class User {
     private String firstName;
     private String lastName;
     private float walletBallanceUSD;
-    private ArrayList<String> cryptos;
 
     public User(){
-        cryptos = new ArrayList<>();
     }
 
-    public User(String uid, String email, String firstName, String lastName, float walletBallanceUSD, ArrayList<String> cryptos) {
+    public User(String uid, String email, String firstName, String lastName, float walletBallanceUSD, ArrayList<String> cryptos, ArrayList<String> transactionsUID) {
         this.uid = uid;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
         this.walletBallanceUSD = walletBallanceUSD;
-        this.cryptos = cryptos;
     }
+
 
     public float getWalletBallanceUSD() {
         return walletBallanceUSD;
     }
 
-    public ArrayList<String> getCryptos() {
-        return cryptos;
-    }
 
     public void setWalletBallanceUSD(float walletBallanceUSD) {
         this.walletBallanceUSD = walletBallanceUSD;
-    }
-
-    public void setCryptos(ArrayList<String> cryptos) {
-        this.cryptos = cryptos;
-    }
-
-    public void addCryptos(String crypto){
-        cryptos.add(crypto);
     }
 
     public String getEmail() {
@@ -88,7 +75,6 @@ public class User {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", walletBallanceUSD=" + walletBallanceUSD +
-                ", cryptos=" + cryptos +
                 '}';
     }
 }

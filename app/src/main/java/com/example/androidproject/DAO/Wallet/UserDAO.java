@@ -7,6 +7,7 @@ import android.app.Application;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.androidproject.DAO.UserLiveData;
@@ -17,10 +18,15 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import org.checkerframework.checker.units.qual.A;
+
+import java.util.ArrayList;
 
 public class UserDAO implements IUserDAO{
     private static final String collectionPath = "users";
@@ -101,13 +107,12 @@ public class UserDAO implements IUserDAO{
 
     @Override
     public void updateUser(User newUser) {
-        DocumentReference docRef = firebaseDatabase.collection(collectionPath).document(newUser.getUid());
-        //updates fields
-        docRef.update("email",newUser.getEmail());
-        docRef.update("lastName",newUser.getLastName());
-        docRef.update("firstName",newUser.getFirstName());
-        docRef.update("cryptos",newUser.getCryptos());
-        docRef.update("walletBallanceUSD",newUser.getWalletBallanceUSD());
+            DocumentReference docRef = firebaseDatabase.collection(collectionPath).document(newUser.getUid());
+            //updates fields
+            docRef.update("email",newUser.getEmail());
+            docRef.update("lastName",newUser.getLastName());
+            docRef.update("firstName",newUser.getFirstName());
+            docRef.update("walletBallanceUSD",newUser.getWalletBallanceUSD());
     }
 
     @Override
@@ -130,6 +135,11 @@ public class UserDAO implements IUserDAO{
     }
 
     @Override
+    public LiveData<FirebaseUser> getCurrentUser() {
+        return liveData;
+    }
+
+    @Override
     public MutableLiveData<User> getUserModal() {
         return userMutableLiveData;
     }
@@ -141,7 +151,6 @@ public class UserDAO implements IUserDAO{
         user.setLastName(userParam.getLastName());
         user.setFirstName(userParam.getFirstName());
         user.setUid(uid);
-        user.setCryptos(null);
         user.setWalletBallanceUSD(0.0f);
 
 
