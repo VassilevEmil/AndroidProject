@@ -26,8 +26,6 @@ public class WalletViewModel extends AndroidViewModel  {
         transactionRepository = TransactionRepository.getInstance(app);
     }
 
-
-
     public void registerATransaction(String userUID,Transaction transaction)
     {
         transactionRepository.addTransaction(userUID,transaction);

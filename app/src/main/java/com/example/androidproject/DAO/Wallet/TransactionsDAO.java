@@ -79,7 +79,7 @@ public class TransactionsDAO implements ITransactionsDAO{
                         Log.w(TAG, "Error writing the transaction", e);
                     }
                 });
-
+        transactionsMutableList.notifyAll();
     }
 
 

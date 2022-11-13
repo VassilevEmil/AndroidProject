@@ -10,8 +10,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,11 +30,14 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.MPPointF;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+
+import lombok.NonNull;
 
 public class WalletFragment extends Fragment {
     private FragmentWalletBinding binding;
@@ -55,7 +60,7 @@ public class WalletFragment extends Fragment {
     //adapter
     WalletAdapter adapter;
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(WalletViewModel.class);
         binding = FragmentWalletBinding.inflate(inflater, container, false);
 
@@ -66,38 +71,48 @@ public class WalletFragment extends Fragment {
         userID = root.findViewById(R.id.test);
         recyclerView.hasFixedSize();
 
-
         //get userID session
-        viewModel.getCurrentUser().observeForever(user->{
-            if(user != null){
-                userID.setText(user.getUid());
-            }
-        });
-
-        viewModel.getUser(userID.getText().toString()).observeForever(user->{
-            totalAmmount.setText(String.valueOf(user.getWalletBallanceUSD()));
-        });
-
-        //populate transactions list
-        viewModel.getTransactions(userID.getText().toString()).observeForever(transactionsList -> {
-            adapter = new WalletAdapter(binding.getRoot().getContext(),transactionsList);
-
-            float amount = 0.0f;
-            setUpGraph(transactionsList);
-            for(Transaction item:transactionsList)
-            {
-                if(item.isBuy()) {
-                    amount += item.getAmount();
-
-                }else{
-                    amount -= item.getAmount();
+        viewModel.getCurrentUser().observeForever(new Observer<FirebaseUser>() {
+            @Override
+            public void onChanged(FirebaseUser firebaseUser) {
+                if(firebaseUser != null){
+                    userID.setText(firebaseUser.getUid());
                 }
             }
+        });
 
 
 
-            //viewModel.updateUser(local);
-            recyclerView.setAdapter(adapter);
+        viewModel.getUser(userID.getText().toString()).observeForever(new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+                totalAmmount.setText(String.valueOf(user.getWalletBallanceUSD()));
+            }
+        });
+
+
+        viewModel.getTransactions(userID.getText().toString()).observeForever(new Observer<List<Transaction>>() {
+            @Override
+            public void onChanged(List<Transaction> transactions) {
+                adapter = new WalletAdapter(binding.getRoot().getContext(),transactions);
+
+                float amount = 0.0f;
+                setUpGraph(transactions);
+                for(Transaction item:transactions)
+                {
+                    if(item.isBuy()) {
+                        amount += item.getAmount();
+
+                    }else{
+                        amount -= item.getAmount();
+                    }
+                }
+
+
+
+                //viewModel.updateUser(local);
+                recyclerView.setAdapter(adapter);
+            }
         });
 
 
@@ -170,7 +185,7 @@ public class WalletFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewModel.getUser(userID.getText().toString()).observeForever(user -> {
+                viewModel.getUser(userID.getText().toString()).observe(getViewLifecycleOwner(),user -> {
                     Transaction localTr = new Transaction();
                     localTr.setNote(note.getText().toString());
                     localTr.setBuy(true);
@@ -212,7 +227,7 @@ public class WalletFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewModel.getUser(userID.getText().toString()).observeForever(user -> {
+                viewModel.getUser(userID.getText().toString()).observe(getViewLifecycleOwner(),user -> {
                     Transaction localTr = new Transaction();
                     localTr.setNote(note.getText().toString());
                     localTr.setBuy(false);
