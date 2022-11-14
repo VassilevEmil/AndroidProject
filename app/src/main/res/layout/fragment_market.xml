@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/infoBar"
-        android:layout_width="411dp"
+        android:layout_width="match_parent"
         android:layout_height="38dp"
         android:background="#033C37"
         app:layout_constraintBottom_toTopOf="@+id/recycleView"
@@ -91,7 +91,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleView"
         android:layout_width="match_parent"
-        android:layout_height="694dp"
+        android:layout_height="664dp"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="-4dp" />

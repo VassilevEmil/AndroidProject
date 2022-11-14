@@ -35,6 +35,7 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder
     holder.rank.setText(String.valueOf(markets.get(position).getRank()));
     holder.symbol.setText(String.valueOf(markets.get(position).getSymbol()));
     holder.currentPrice.setText(String.valueOf(markets.get(position).getCurrentPrice()));
+    holder.price_change_percentage_24h.setText(String.valueOf(markets.get(position).getPrice_change_percentage_24h()));
     holder.market_cap.setText(String.valueOf(markets.get(position).getMarket_cap()));
     }
 
@@ -58,7 +59,7 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder
             symbol = itemView.findViewById(R.id.coin);
             currentPrice = itemView.findViewById(R.id.price);
             price_change_percentage_24h = itemView.findViewById(R.id.percentage_change);
-            market_cap = itemView.findViewById(R.id.market_Cap);
+            market_cap = itemView.findViewById(R.id.market_cap);
         }
     }
 }

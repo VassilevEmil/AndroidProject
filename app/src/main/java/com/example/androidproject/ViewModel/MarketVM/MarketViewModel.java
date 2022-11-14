@@ -20,4 +20,5 @@ public class MarketViewModel extends ViewModel {
     public LiveData<List<Market>> getMarketData(){
         return repository.getMarketData();
     }
+
 }
