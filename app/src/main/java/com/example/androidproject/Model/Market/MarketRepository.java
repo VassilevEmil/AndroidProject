@@ -1,6 +1,7 @@
 package com.example.androidproject.Model.Market;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.androidproject.Entities.Market.Market;
 
@@ -8,20 +9,22 @@ import java.util.List;
 
 public class MarketRepository {
 
-    private final MarketDao marketDao;
     private static MarketRepository instance;
+    private final MutableLiveData<List<Market>> marketData;
     
     private MarketRepository(){
-        marketDao = MarketDao.getInstance();
+        marketData = new MutableLiveData<>();
+    }
+
+    public MutableLiveData<List<Market>> getMarketData(){
+        return marketData;
     }
     
-    public static MarketRepository getInstance(){
+    public static synchronized MarketRepository getInstance(){
         if(instance == null)
             instance = new MarketRepository();
         return instance;
     }
 
-    public LiveData<List<Market>> getMarketData() {
-        return  marketDao.getMarketData();
-    }
+
 }

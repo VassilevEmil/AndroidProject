@@ -35,9 +35,7 @@ public class MarketFragment extends Fragment {
     private FragmentMarketBinding binding;
     private MarketViewModel viewModel;
     RecyclerView recyclerView;
-    List<Market> market = new ArrayList<Market>();
-
-
+    List<Market> market;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -61,16 +59,15 @@ public class MarketFragment extends Fragment {
     }
 
     private void findMarket() {
-        MarketServiceGenerator.getMarketApi().searchMarket("usd", "market_cap_desc", "50").enqueue(new Callback<MarketResponse>() {
+        MarketServiceGenerator.getMarketApi().searchMarket("usd", "market_cap_desc", 50).enqueue(new Callback<MarketResponse>() {
             @Override
             public void onResponse(Call<MarketResponse> call, Response<MarketResponse> response) {
                 if (response.isSuccessful()) {
                     Log.d("MARKET_RESPONSE_BODY","SUCCESSFUL REQUEST");
 
-                    assert response.body() != null;
                     Log.d("API_DATA_TEST","PASSED");
                     market.add(response.body().getMarket());
-                } else Log.d("MARKET_RESPONSE_BODY","UNSUCCESSFUL REQUEST"+ response.code());
+                } else Log.d("MARKET_RESPONSE_BODY","UNSUCCESSFUL REQUEST"+ response.code() + " " + response.message() + " " + response.raw());
 
             }
 

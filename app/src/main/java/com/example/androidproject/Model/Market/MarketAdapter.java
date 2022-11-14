@@ -1,5 +1,7 @@
 package com.example.androidproject.Model.Market;
 
+
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.androidproject.Entities.Market.Market;
 import com.example.androidproject.R;
 
-import org.w3c.dom.Text;
-
+import java.util.ArrayList;
 import java.util.List;
 
 public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder> {
 
-    List<Market> markets;
+
+    List<Market> markets = new ArrayList<>();
 
     public MarketAdapter(List<Market> markets){
         this.markets = markets; // "cryptos" would be better naming
@@ -25,13 +27,12 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder
     @NonNull
     @Override
     public MarketAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.post_crypto, parent, false);
+        View view  = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_crypto, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MarketAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MarketAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
     holder.rank.setText(String.valueOf(markets.get(position).getRank()));
     holder.symbol.setText(String.valueOf(markets.get(position).getSymbol()));
     holder.currentPrice.setText(String.valueOf(markets.get(position).getCurrentPrice()));

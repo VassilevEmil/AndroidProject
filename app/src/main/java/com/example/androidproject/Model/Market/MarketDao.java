@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.androidproject.Entities.Market.Market;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +15,8 @@ public class MarketDao {
 
     private MarketDao(){
         marketData = new MutableLiveData<>();
-        List<Market> dataList = new ArrayList<>();
-        marketData.setValue(dataList);
+        List<Market> marketList =  new ArrayList<>();
+        marketData.setValue(marketList);
     }
 
     public static MarketDao getInstance(){

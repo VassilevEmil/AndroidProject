@@ -1,6 +1,5 @@
 package com.example.androidproject.Model.Market;
 
-import com.example.androidproject.Model.Market.MarketApi;
 import com.example.androidproject.Model.utils.Credentials;
 
 import retrofit2.Retrofit;

@@ -17,6 +17,7 @@ public class MarketViewModel extends ViewModel {
         repository = MarketRepository.getInstance();
     }
 
+
     public LiveData<List<Market>> getMarketData(){
         return repository.getMarketData();
     }
