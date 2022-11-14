@@ -46,23 +46,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(NewsAdapter.ViewHolder viewHolder, @SuppressLint("RecyclerView") int i) {
 
-        // method for opening a new intent when clicking to see a news
 
-        //        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(context, webView.class);
-//                //intent.putExtra("url", modelList.get(i).getUrl());
-//                context.startActivity(intent);
-//            }
-//        });
 
         viewHolder.mtime.setText("Published at:-" + modelList.get(i).getPubDate());
         viewHolder.mheading.setText(modelList.get(i).getTitle());
 
         // sometimes run sometimes doesnt => ask kasper
 
-       //  viewHolder.mcreator.setText(modelList.get(i).getCreator().get(0));
+        viewHolder.mcreator.setText(modelList.get(i).getCreator().get(0));
         viewHolder.mcontent.setText(modelList.get(i).getContent());
 
         // problems with the context
@@ -85,12 +76,27 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         CardView cardView;
         ImageView imageView;
 
+
         public ViewHolder(View itemView) {
             super(itemView);
             mheading = itemView.findViewById(R.id.maintitle);
             mcontent = itemView.findViewById(R.id.content);
             mcreator = itemView.findViewById(R.id.author);
             mtime = itemView.findViewById(R.id.time);
+
+
+
+            // method for opening a new intent when clicking to see a news
+
+           cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, webView.class);
+                    //intent.putExtra("url", modelList.get(i).getUrl());
+                    context.startActivity(intent);
+                }
+            });
+
         }
     }
 }
