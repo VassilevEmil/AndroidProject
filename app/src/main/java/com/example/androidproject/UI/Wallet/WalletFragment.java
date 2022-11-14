@@ -14,6 +14,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -63,6 +65,7 @@ public class WalletFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(WalletViewModel.class);
+
         binding = FragmentWalletBinding.inflate(inflater, container, false);
 
         localUser= new User();
@@ -71,6 +74,7 @@ public class WalletFragment extends Fragment {
         recyclerView = root.findViewById(R.id.portfolio_transactions_list);
         userID = root.findViewById(R.id.test);
         recyclerView.hasFixedSize();
+//
 
         //get userID session
         viewModel.getCurrentUser().observeForever(new Observer<FirebaseUser>() {
@@ -81,40 +85,8 @@ public class WalletFragment extends Fragment {
                 }else{
                     viewModel.loginAccount((Activity) getView().getContext(),"goformusicro@gmail.com","test1234567");
                 }
-            }
-        });
-
-
-
-        viewModel.getUser(userID.getText().toString()).observeForever(new Observer<User>() {
-            @Override
-            public void onChanged(User user) {
-                totalAmmount.setText(String.valueOf(user.getWalletBallanceUSD()));
-            }
-        });
-
-
-        viewModel.getTransactions(userID.getText().toString()).observeForever(new Observer<List<Transaction>>() {
-            @Override
-            public void onChanged(List<Transaction> transactions) {
-                adapter = new WalletAdapter(binding.getRoot().getContext(),transactions);
-
-                float amount = 0.0f;
-                setUpGraph(transactions);
-                for(Transaction item:transactions)
-                {
-                    if(item.isBuy()) {
-                        amount += item.getAmount();
-
-                    }else{
-                        amount -= item.getAmount();
-                    }
-                }
-
-
-
-                //viewModel.updateUser(local);
-                recyclerView.setAdapter(adapter);
+                setTotalAmmount();
+                setTransactionList();
             }
         });
 
@@ -139,6 +111,39 @@ public class WalletFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
 
         return root;
+    }
+
+    private void setTotalAmmount()
+    {
+        viewModel.getUser(userID.getText().toString()).observeForever(new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+                totalAmmount.setText(String.valueOf(user.getWalletBallanceUSD()));
+            }
+        });
+    }
+
+    private void setTransactionList()
+    {
+        viewModel.getTransactions(userID.getText().toString()).observeForever(transactions ->  {
+            adapter = new WalletAdapter(binding.getRoot().getContext(),transactions);
+
+
+            float amount = 0.0f;
+            setUpGraph(transactions);
+            for(Transaction item:transactions)
+            {
+                if(item.isBuy()) {
+                    amount += item.getAmount();
+
+                }else{
+                    amount -= item.getAmount();
+                }
+            }
+
+            recyclerView.setAdapter(adapter);
+        });
+
     }
 
     private void setUpGraph(List<Transaction> transactionsList){
@@ -188,15 +193,16 @@ public class WalletFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewModel.getUser(userID.getText().toString()).observe(getViewLifecycleOwner(),user -> {
-                    Transaction localTr = new Transaction();
-                    localTr.setNote(note.getText().toString());
-                    localTr.setBuy(true);
-                    localTr.setDate(new Date().toString());
-                    localTr.setCryptoName(cryptoName.getText().toString());
-                    localTr.setAmount(Float.parseFloat(amount.getText().toString()));
-                    viewModel.registerATransaction(user.getUid(),localTr);
-                });
+
+                Transaction localTr = new Transaction();
+                localTr.setNote(note.getText().toString());
+                localTr.setBuy(true);
+                localTr.setDate(new Date().toString());
+                localTr.setCryptoName(cryptoName.getText().toString());
+                localTr.setAmount(Float.parseFloat(amount.getText().toString()));
+                viewModel.registerATransaction(userID.getText().toString(),localTr);
+                setTotalAmmount();
+                setTransactionList();
                 dialog.dismiss();
             }
         });
@@ -230,15 +236,15 @@ public class WalletFragment extends Fragment {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewModel.getUser(userID.getText().toString()).observe(getViewLifecycleOwner(),user -> {
-                    Transaction localTr = new Transaction();
-                    localTr.setNote(note.getText().toString());
-                    localTr.setBuy(false);
-                    localTr.setDate(new Date().toString());
-                    localTr.setCryptoName(cryptoName.getText().toString());
-                    localTr.setAmount(Float.parseFloat(amount.getText().toString()));
-                    viewModel.registerATransaction(user.getUid(),localTr);
-                });
+                Transaction localTr = new Transaction();
+                localTr.setNote(note.getText().toString());
+                localTr.setBuy(false);
+                localTr.setDate(new Date().toString());
+                localTr.setCryptoName(cryptoName.getText().toString());
+                localTr.setAmount(Float.parseFloat(amount.getText().toString()));
+                viewModel.registerATransaction(userID.getText().toString(),localTr);
+                setTotalAmmount();
+                setTransactionList();
                 dialog.dismiss();
             }
         });
