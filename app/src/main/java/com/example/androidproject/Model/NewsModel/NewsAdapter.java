@@ -47,6 +47,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     public void onBindViewHolder(NewsAdapter.ViewHolder viewHolder, @SuppressLint("RecyclerView") int i) {
 
 
+        // method for opening a new intent when clicking to see a news
+//
+//        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(view.getContext(), webView.class);
+//                view.getContext().startActivity(intent);
+//            }
+//        });
+
 
         viewHolder.mtime.setText("Published at:-" + modelList.get(i).getPubDate());
         viewHolder.mheading.setText(modelList.get(i).getTitle());
@@ -70,12 +80,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         return modelList.size();
     }
 
+
+    //  public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView mheading, mcontent, mcreator, mtime;
         CardView cardView;
         ImageView imageView;
-
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -83,20 +95,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             mcontent = itemView.findViewById(R.id.content);
             mcreator = itemView.findViewById(R.id.author);
             mtime = itemView.findViewById(R.id.time);
-
-
-
-            // method for opening a new intent when clicking to see a news
-
-           cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(context, webView.class);
-                    //intent.putExtra("url", modelList.get(i).getUrl());
-                    context.startActivity(intent);
-                }
-            });
+          //  imageView = itemView.findViewById(R.id.)
 
         }
+
+        // method for opening a new intent when clicking to see a news
+
+    };
+
     }
-}
+
