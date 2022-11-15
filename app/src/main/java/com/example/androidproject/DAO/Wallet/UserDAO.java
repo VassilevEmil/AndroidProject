@@ -108,7 +108,6 @@ public class UserDAO implements IUserDAO{
             docRef.update("email",newUser.getEmail());
             docRef.update("lastName",newUser.getLastName());
             docRef.update("firstName",newUser.getFirstName());
-            docRef.update("walletBallanceUSD",newUser.getWalletBallanceUSD());
     }
 
     @Override
@@ -166,7 +165,6 @@ public class UserDAO implements IUserDAO{
         user.setLastName(userParam.getLastName());
         user.setFirstName(userParam.getFirstName());
         user.setUid(uid);
-        user.setWalletBallanceUSD(0.0f);
 
 
         firebaseDatabase.collection(collectionPath).document(uid).set(user)

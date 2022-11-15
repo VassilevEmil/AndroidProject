@@ -2,6 +2,7 @@ package com.example.androidproject.ViewModel.WalletVM;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -18,11 +19,9 @@ import java.util.List;
 public class WalletViewModel extends AndroidViewModel  {
     UserRepository userRepository;
     TransactionRepository transactionRepository;
-    Application app;
 
     public WalletViewModel(Application app){
         super(app);
-        this.app=app;
         userRepository = UserRepository.getInstance(app);
         transactionRepository = TransactionRepository.getInstance(app);
     }
@@ -32,9 +31,9 @@ public class WalletViewModel extends AndroidViewModel  {
         transactionRepository.addTransaction(userUID,transaction);
     }
 
-    public void registerAccount(User user, String password)
+    public void registerAccount(Activity activity,User user, String password)
     {
-        userRepository.registerAccount((Activity) app.getApplicationContext(),user,password);
+        userRepository.registerAccount(activity,user,password);
     }
 
     public MutableLiveData<List<Transaction>> getTransactions(String userUID){
@@ -65,7 +64,7 @@ public class WalletViewModel extends AndroidViewModel  {
         userRepository.updateUser(user);
     }
 
-    public void loginAccount(String email, String password){
-        userRepository.loginAccount((Activity) app.getApplicationContext(), email, password);
+    public void loginAccount(Activity activity,String email, String password){
+        userRepository.loginAccount(activity, email, password);
     }
 }

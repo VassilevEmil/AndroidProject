@@ -1,6 +1,7 @@
 package com.example.androidproject.UI.Wallet;
 
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -77,6 +78,11 @@ public class WalletFragment extends Fragment {
         userID = root.findViewById(R.id.test);
         recyclerView.hasFixedSize();
 //
+        User local = new User();
+        local.setEmail("goformusicro@gmail.com");
+        local.setFirstName("Adrian");
+        local.setLastName("Militaru");
+        viewModel.registerAccount((Activity) root.getContext(),local,"test1234567");
 
         //get userID session
         viewModel.getCurrentUser().observeForever(new Observer<FirebaseUser>() {
@@ -85,7 +91,7 @@ public class WalletFragment extends Fragment {
                 if(firebaseUser != null){
                     userID.setText(firebaseUser.getUid());
                 }else{
-                    viewModel.loginAccount("goformusicro@gmail.com","test1234567");
+                    viewModel.loginAccount((Activity) root.getContext(),"goformusicro@gmail.com","test1234567");
                 }
 
                 setTransactionList();
