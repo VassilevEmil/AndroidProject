@@ -9,7 +9,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -20,11 +22,13 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.androidproject.Entities.Market.Market;
 import com.example.androidproject.Entities.Wallet.Transaction;
 
 import com.example.androidproject.Entities.Wallet.User;
 import com.example.androidproject.R;
 
+import com.example.androidproject.ViewModel.MarketVM.MarketViewModel;
 import com.example.androidproject.ViewModel.WalletVM.WalletAdapter;
 import com.example.androidproject.ViewModel.WalletVM.WalletViewModel;
 import com.example.androidproject.databinding.FragmentWalletBinding;
@@ -47,6 +51,7 @@ import lombok.NonNull;
 public class WalletFragment extends Fragment {
     private FragmentWalletBinding binding;
     private WalletViewModel viewModel;
+    private MarketViewModel marketViewModel;
     //dialog
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
@@ -68,6 +73,7 @@ public class WalletFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(WalletViewModel.class);
+        marketViewModel = new MarketViewModel();
 
         binding = FragmentWalletBinding.inflate(inflater, container, false);
 
@@ -78,12 +84,6 @@ public class WalletFragment extends Fragment {
         userID = root.findViewById(R.id.test);
         recyclerView.hasFixedSize();
 //
-        User local = new User();
-        local.setEmail("goformusicro@gmail.com");
-        local.setFirstName("Adrian");
-        local.setLastName("Militaru");
-        viewModel.registerAccount((Activity) root.getContext(),local,"test1234567");
-
         //get userID session
         viewModel.getCurrentUser().observeForever(new Observer<FirebaseUser>() {
             @Override
@@ -205,7 +205,18 @@ public class WalletFragment extends Fragment {
         //fields
         TextView note = popUp.findViewById(R.id.portfolio_buy_note);
         TextView amount = popUp.findViewById(R.id.portfolio_buy_amount);
-        TextView cryptoName = popUp.findViewById(R.id.portfolio_buy_cryptoName);
+        Spinner cryptoName = popUp.findViewById(R.id.portfolio_buy_cryptoName);
+
+        List<String> crptoNameList = new ArrayList<>();
+
+        for(Market item: marketViewModel.getMarketData().getValue()){
+            crptoNameList.add(item.getName());
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(popUp.getContext(), android.R.layout.simple_spinner_item,crptoNameList);
+        adapter.setDropDownViewResource(androidx.constraintlayout.widget.R.layout.support_simple_spinner_dropdown_item);
+
+        cryptoName.setAdapter(adapter);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -215,7 +226,7 @@ public class WalletFragment extends Fragment {
                 localTr.setNote(note.getText().toString());
                 localTr.setBuy(true);
                 localTr.setDate(new Date().toString());
-                localTr.setCryptoName(cryptoName.getText().toString());
+                localTr.setCryptoName(cryptoName.getSelectedItem().toString());
                 localTr.setAmount(Float.parseFloat(amount.getText().toString()));
                 viewModel.registerATransaction(userID.getText().toString(),localTr);
                 setTransactionList();
@@ -247,7 +258,18 @@ public class WalletFragment extends Fragment {
         //fields
         TextView note = popUp.findViewById(R.id.portfolio_sell_note);
         TextView amount = popUp.findViewById(R.id.portfolio_sell_amount);
-        TextView cryptoName = popUp.findViewById(R.id.portfolio_sell_cryptoName);
+        Spinner cryptoName = popUp.findViewById(R.id.portfolio_sell_cryptoName);
+
+        List<String> crptoNameList = new ArrayList<>();
+
+        for(Market item: marketViewModel.getMarketData().getValue()){
+            crptoNameList.add(item.getName());
+        }
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(popUp.getContext(), android.R.layout.simple_spinner_item,crptoNameList);
+        adapter.setDropDownViewResource(androidx.constraintlayout.widget.R.layout.support_simple_spinner_dropdown_item);
+
+        cryptoName.setAdapter(adapter);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -256,7 +278,7 @@ public class WalletFragment extends Fragment {
                 localTr.setNote(note.getText().toString());
                 localTr.setBuy(false);
                 localTr.setDate(new Date().toString());
-                localTr.setCryptoName(cryptoName.getText().toString());
+                localTr.setCryptoName(cryptoName.getSelectedItem().toString());
                 localTr.setAmount(Float.parseFloat(amount.getText().toString()));
                 viewModel.registerATransaction(userID.getText().toString(),localTr);
                 setTransactionList();
