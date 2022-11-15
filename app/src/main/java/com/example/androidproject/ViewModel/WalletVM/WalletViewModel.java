@@ -6,10 +6,9 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.example.androidproject.Entities.wallet.Transaction;
-import com.example.androidproject.Entities.wallet.User;
+import com.example.androidproject.Entities.Wallet.Transaction;
+import com.example.androidproject.Entities.Wallet.User;
 import com.example.androidproject.Model.Wallet.TransactionRepository;
 import com.example.androidproject.Model.Wallet.UserRepository;
 import com.google.firebase.auth.FirebaseUser;

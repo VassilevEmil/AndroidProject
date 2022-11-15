@@ -1,6 +1,4 @@
-package com.example.androidproject.Entities.wallet;
-
-import com.google.firebase.database.IgnoreExtraProperties;
+package com.example.androidproject.Entities.Wallet;
 
 import java.util.ArrayList;
 

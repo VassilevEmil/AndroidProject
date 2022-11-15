@@ -1,12 +1,8 @@
 package com.example.androidproject.DAO.Wallet;
 
-import android.app.Activity;
-
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.androidproject.Entities.wallet.Transaction;
-import com.example.androidproject.Entities.wallet.User;
+import com.example.androidproject.Entities.Wallet.Transaction;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.androidproject.Entities.wallet;
+package com.example.androidproject.Entities.Wallet;
 
 import java.util.UUID;
 
