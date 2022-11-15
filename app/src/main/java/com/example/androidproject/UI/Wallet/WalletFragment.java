@@ -83,7 +83,7 @@ public class WalletFragment extends Fragment {
                 if(firebaseUser != null){
                     userID.setText(firebaseUser.getUid());
                 }else{
-                    viewModel.loginAccount((Activity) getView().getContext(),"goformusicro@gmail.com","test1234567");
+                    viewModel.loginAccount("goformusicro@gmail.com","test1234567");
                 }
                 setTotalAmmount();
                 setTransactionList();

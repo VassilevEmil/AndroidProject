@@ -19,9 +19,11 @@ import java.util.List;
 public class WalletViewModel extends AndroidViewModel  {
     UserRepository userRepository;
     TransactionRepository transactionRepository;
+    Application app;
 
     public WalletViewModel(Application app){
         super(app);
+        this.app=app;
         userRepository = UserRepository.getInstance(app);
         transactionRepository = TransactionRepository.getInstance(app);
     }
@@ -31,9 +33,9 @@ public class WalletViewModel extends AndroidViewModel  {
         transactionRepository.addTransaction(userUID,transaction);
     }
 
-    public void registerAccount(Activity activity, User user, String password)
+    public void registerAccount(User user, String password)
     {
-        userRepository.registerAccount(activity,user,password);
+        userRepository.registerAccount((Activity) app.getApplicationContext(),user,password);
     }
 
     public MutableLiveData<List<Transaction>> getTransactions(String userUID){
@@ -64,7 +66,7 @@ public class WalletViewModel extends AndroidViewModel  {
         userRepository.updateUser(user);
     }
 
-    public void loginAccount(Activity activity, String email, String password){
-        userRepository.loginAccount(activity, email, password);
+    public void loginAccount(String email, String password){
+        userRepository.loginAccount((Activity) app.getApplicationContext(), email, password);
     }
 }
