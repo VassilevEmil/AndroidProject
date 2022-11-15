@@ -87,7 +87,7 @@ public class WalletFragment extends Fragment {
                 }else{
                     viewModel.loginAccount("goformusicro@gmail.com","test1234567");
                 }
-                setTotalAmmount();
+
                 setTransactionList();
             }
         });
@@ -115,16 +115,6 @@ public class WalletFragment extends Fragment {
         return root;
     }
 
-    private void setTotalAmmount()
-    {
-        viewModel.getUser(userID.getText().toString()).observeForever(new Observer<User>() {
-            @Override
-            public void onChanged(User user) {
-                totalAmmount.setText(String.valueOf(user.getWalletBallanceUSD()));
-            }
-        });
-    }
-
     private void setTransactionList()
     {
         viewModel.getTransactions(userID.getText().toString()).observeForever(transactions ->  {
@@ -132,7 +122,9 @@ public class WalletFragment extends Fragment {
 
 
             float amount = 0.0f;
-            setUpGraph(transactions);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                setUpGraph(transactions);
+            }
             for(Transaction item:transactions)
             {
                 if(item.isBuy()) {
@@ -144,6 +136,7 @@ public class WalletFragment extends Fragment {
             }
 
             recyclerView.setAdapter(adapter);
+            totalAmmount.setText(String.valueOf(amount)+" $");
         });
 
     }
@@ -207,7 +200,6 @@ public class WalletFragment extends Fragment {
                 localTr.setCryptoName(cryptoName.getText().toString());
                 localTr.setAmount(Float.parseFloat(amount.getText().toString()));
                 viewModel.registerATransaction(userID.getText().toString(),localTr);
-                setTotalAmmount();
                 setTransactionList();
                 dialog.dismiss();
             }
@@ -249,7 +241,6 @@ public class WalletFragment extends Fragment {
                 localTr.setCryptoName(cryptoName.getText().toString());
                 localTr.setAmount(Float.parseFloat(amount.getText().toString()));
                 viewModel.registerATransaction(userID.getText().toString(),localTr);
-                setTotalAmmount();
                 setTransactionList();
                 dialog.dismiss();
             }
