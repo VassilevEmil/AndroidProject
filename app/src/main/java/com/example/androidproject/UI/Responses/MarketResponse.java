@@ -3,13 +3,23 @@ package com.example.androidproject.UI.Responses;
 import com.example.androidproject.Entities.Market.Market;
 import com.example.androidproject.Entities.NewsModel;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MarketResponse {
 
-    private String image, symbol;
-    private double current_price, price_change_24h, market_cap;
-    private int market_cap_rank;
+    private ArrayList<Market> results;
 
-    public Market getMarket(){
-        return new Market(market_cap_rank, image, symbol, current_price, price_change_24h, market_cap);
+    public MarketResponse(ArrayList<Market> results){
+        this.results = results;
     }
+
+    public ArrayList<Market> getMarket() {
+        return results;
+    }
+
+    public void setResults(ArrayList<Market> results) {
+        this.results = results;
+    }
+
 }

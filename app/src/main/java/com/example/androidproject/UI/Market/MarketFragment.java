@@ -32,50 +32,32 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MarketFragment extends Fragment {
+
     private FragmentMarketBinding binding;
     private MarketViewModel viewModel;
     RecyclerView recyclerView;
-    List<Market> market;
+    List<Market> marketList = new ArrayList<>();
+    MarketAdapter adapter;
 
 
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+
         viewModel = new ViewModelProvider(this).get(MarketViewModel.class);
-
         binding = FragmentMarketBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         recyclerView = root.findViewById(R.id.recycleView);
         recyclerView.hasFixedSize();
-        recyclerView.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
-        viewModel.getMarketData().observe(getViewLifecycleOwner(), number->{
 
-            MarketAdapter adapter = new MarketAdapter(market); // passing List<Market> which includes data from api
+        viewModel.getMarket();
+        viewModel.getMarketData().observeForever(marketList -> {
+            adapter = new MarketAdapter(binding.getRoot().getContext(), marketList);
             recyclerView.setAdapter(adapter);
-        }
-             );
-
-        findMarket();
-        return root;
-    }
-
-    private void findMarket() {
-        MarketServiceGenerator.getMarketApi().searchMarket("usd", "market_cap_desc", 50).enqueue(new Callback<MarketResponse>() {
-            @Override
-            public void onResponse(Call<MarketResponse> call, Response<MarketResponse> response) {
-                if (response.isSuccessful()) {
-                    Log.d("MARKET_RESPONSE_BODY","SUCCESSFUL REQUEST");
-
-                    Log.d("API_DATA_TEST","PASSED");
-                    market.add(response.body().getMarket());
-                } else Log.d("MARKET_RESPONSE_BODY","UNSUCCESSFUL REQUEST"+ response.code() + " " + response.message() + " " + response.raw());
-
-            }
-
-            @Override
-            public void onFailure(Call<MarketResponse> call, Throwable t) {
-                Toast.makeText(binding.getRoot().getContext(), "Error: ", Toast.LENGTH_SHORT).show();
-            }
         });
 
+         recyclerView.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
+
+        return root;
     }
 }

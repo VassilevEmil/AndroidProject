@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.content.Context;
+
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,12 +20,14 @@ import java.util.List;
 
 public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder> {
 
+    Context context;
+    List<Market> markets;
 
-    List<Market> markets = new ArrayList<>();
-
-    public MarketAdapter(List<Market> markets){
+    public MarketAdapter(Context context, List<Market> markets){
         this.markets = markets; // "cryptos" would be better naming
+        this.context = context;
     }
+
     @NonNull
     @Override
     public MarketAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -31,13 +35,14 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull MarketAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-    holder.rank.setText(String.valueOf(markets.get(position).getRank()));
-    holder.symbol.setText(String.valueOf(markets.get(position).getSymbol()));
+    holder.rank.setText(Integer.toString(markets.get(position).getMarketCapRank()));
+    holder.symbol.setText(markets.get(position).getSymbol());
     holder.currentPrice.setText(String.valueOf(markets.get(position).getCurrentPrice()));
-    holder.price_change_percentage_24h.setText(String.valueOf(markets.get(position).getPrice_change_percentage_24h()));
-    holder.market_cap.setText(String.valueOf(markets.get(position).getMarket_cap()));
+    holder.price_change_percentage_24h.setText(String.valueOf(markets.get(position).getPriceChangePercentage24h()));
+    holder.market_cap.setText(String.valueOf(markets.get(position).getMarketCap()));
     }
 
     @Override
