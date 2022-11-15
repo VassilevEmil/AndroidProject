@@ -1,41 +1,63 @@
 package com.example.androidproject.Entities.Market;
 
-public class Market {
-    // USE /COINS/LIST endpoint
+import java.io.Serializable;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
-    int rank; // based on market_cap_rank (coingecko api documentation)
-    String tokenImage_url;
-    String symbol;
-    double currentPrice;
-    double price_change_percentage_24h;
-    double market_cap;
+import lombok.Generated;
 
-    public Market(int rank, String tokenImage_url, String symbol, double currentPrice, double price_change_percentage_24h, double market_cap)
-    {
-        this.rank = rank;
-        this.tokenImage_url = tokenImage_url;
+public class Market implements Serializable
+{
+
+    @SerializedName("symbol")
+    @Expose
+    private String symbol;
+    @SerializedName("name")
+    @Expose
+    private String name;
+    @SerializedName("image")
+    @Expose
+    private String image;
+    @SerializedName("current_price")
+    @Expose
+    private Double currentPrice;
+    @SerializedName("market_cap")
+    @Expose
+    private Long marketCap;
+    @SerializedName("market_cap_rank")
+    @Expose
+    private Integer marketCapRank;
+    @SerializedName("price_change_percentage_24h")
+    @Expose
+    private Double priceChangePercentage24h;
+    private final static long serialVersionUID = 747698509230512162L;
+
+    /**
+     * No args constructor for use in serialization
+     *
+     */
+    public Market() {
+    }
+
+    /**
+     *
+     * @param symbol
+     * @param image
+     * @param marketCap
+     * @param priceChangePercentage24h
+     * @param marketCapRank
+     * @param name
+     * @param currentPrice
+     */
+    public Market(String symbol, String name, String image, Double currentPrice, Long marketCap, Integer marketCapRank, Double priceChangePercentage24h) {
+        super();
         this.symbol = symbol;
+        this.name = name;
+        this.image = image;
         this.currentPrice = currentPrice;
-        this.price_change_percentage_24h = price_change_percentage_24h;
-        this.market_cap = market_cap;
-    }
-
-    public Market(){}
-
-    public int getRank() {
-        return rank;
-    }
-
-    public void setRank(int rank) {
-        this.rank = rank;
-    }
-
-    public String getTokenImage_url() {
-        return tokenImage_url;
-    }
-
-    public void setTokenImage_url(String tokenImage_url) {
-        this.tokenImage_url = tokenImage_url;
+        this.marketCap = marketCap;
+        this.marketCapRank = marketCapRank;
+        this.priceChangePercentage24h = priceChangePercentage24h;
     }
 
     public String getSymbol() {
@@ -46,27 +68,52 @@ public class Market {
         this.symbol = symbol;
     }
 
-    public double getCurrentPrice() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public Double getCurrentPrice() {
         return currentPrice;
     }
 
-    public void setCurrentPrice(double currentPrice) {
+    public void setCurrentPrice(Double currentPrice) {
         this.currentPrice = currentPrice;
     }
 
-    public double getPrice_change_percentage_24h() {
-        return price_change_percentage_24h;
+    public Long getMarketCap() {
+        return marketCap;
     }
 
-    public void setPrice_change_percentage_24h(double price_change_percentage_24h) {
-        this.price_change_percentage_24h = price_change_percentage_24h;
+    public void setMarketCap(Long marketCap) {
+        this.marketCap = marketCap;
     }
 
-    public double getMarket_cap() {
-        return market_cap;
+    public Integer getMarketCapRank() {
+        return marketCapRank;
     }
 
-    public void setMarket_cap(double market_cap) {
-        this.market_cap = market_cap;
+    public void setMarketCapRank(Integer marketCapRank) {
+        this.marketCapRank = marketCapRank;
     }
+
+    public Double getPriceChangePercentage24h() {
+        return priceChangePercentage24h;
+    }
+
+    public void setPriceChangePercentage24h(Double priceChangePercentage24h) {
+        this.priceChangePercentage24h = priceChangePercentage24h;
+    }
+
 }
