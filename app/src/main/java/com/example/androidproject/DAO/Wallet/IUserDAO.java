@@ -5,7 +5,7 @@ import android.app.Activity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.androidproject.Entities.wallet.User;
+import com.example.androidproject.Entities.Wallet.User;
 import com.google.firebase.auth.FirebaseUser;
 
 public interface IUserDAO {

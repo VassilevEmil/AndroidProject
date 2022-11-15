@@ -3,6 +3,7 @@ package com.example.androidproject.UI.Wallet;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
@@ -11,19 +12,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.androidproject.Entities.wallet.Transaction;
+import com.example.androidproject.Entities.Wallet.Transaction;
 
-import com.example.androidproject.Entities.wallet.User;
+import com.example.androidproject.Entities.Wallet.User;
 import com.example.androidproject.R;
 
 import com.example.androidproject.ViewModel.WalletVM.WalletAdapter;
@@ -37,8 +36,11 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import lombok.NonNull;
 
@@ -63,6 +65,7 @@ public class WalletFragment extends Fragment {
     //adapter
     WalletAdapter adapter;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(WalletViewModel.class);
 
@@ -75,6 +78,11 @@ public class WalletFragment extends Fragment {
         userID = root.findViewById(R.id.test);
         recyclerView.hasFixedSize();
 //
+        User local = new User();
+        local.setEmail("goformusicro@gmail.com");
+        local.setFirstName("Adrian");
+        local.setLastName("Militaru");
+        viewModel.registerAccount((Activity) root.getContext(),local,"test1234567");
 
         //get userID session
         viewModel.getCurrentUser().observeForever(new Observer<FirebaseUser>() {
@@ -83,9 +91,9 @@ public class WalletFragment extends Fragment {
                 if(firebaseUser != null){
                     userID.setText(firebaseUser.getUid());
                 }else{
-                    viewModel.loginAccount((Activity) getView().getContext(),"goformusicro@gmail.com","test1234567");
+                    viewModel.loginAccount((Activity) root.getContext(),"goformusicro@gmail.com","test1234567");
                 }
-                setTotalAmmount();
+
                 setTransactionList();
             }
         });
@@ -113,16 +121,6 @@ public class WalletFragment extends Fragment {
         return root;
     }
 
-    private void setTotalAmmount()
-    {
-        viewModel.getUser(userID.getText().toString()).observeForever(new Observer<User>() {
-            @Override
-            public void onChanged(User user) {
-                totalAmmount.setText(String.valueOf(user.getWalletBallanceUSD()));
-            }
-        });
-    }
-
     private void setTransactionList()
     {
         viewModel.getTransactions(userID.getText().toString()).observeForever(transactions ->  {
@@ -130,7 +128,9 @@ public class WalletFragment extends Fragment {
 
 
             float amount = 0.0f;
-            setUpGraph(transactions);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                setUpGraph(transactions);
+            }
             for(Transaction item:transactions)
             {
                 if(item.isBuy()) {
@@ -142,34 +142,51 @@ public class WalletFragment extends Fragment {
             }
 
             recyclerView.setAdapter(adapter);
+            totalAmmount.setText(String.valueOf(amount)+" $");
         });
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void setUpGraph(List<Transaction> transactionsList){
-
-        List<PieEntry> pieChartList = new ArrayList<>();
+        Map<String, PieEntry> words = new HashMap<>();
         List<Integer> colorsList = new ArrayList<>();
 
+
         for(Transaction item: transactionsList){
+            List<PieEntry> pieChartList = new ArrayList<>();
+            System.out.println(item.isBuy());
             if(item.isBuy()){
-                pieChartList.add(new PieEntry(item.getAmount(),item.getCryptoName()));
+                words.compute(item.getCryptoName(), (key,value) -> value ==null? new PieEntry(item.getAmount(),item.getCryptoName()) : new PieEntry(item.getAmount()+value.getValue(),item.getCryptoName()));
+
+                pieChartList.addAll(words.values());
+                Random rnd = new Random();
+                int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+                colorsList.add(color);
+
+            }else if(!item.isBuy()){
+                words.compute(item.getCryptoName(), (key,value) -> value ==null? new PieEntry(-1*item.getAmount(),item.getCryptoName()) : new PieEntry(item.getAmount()-value.getValue(),item.getCryptoName()));
+
+                pieChartList.addAll(words.values());
                 Random rnd = new Random();
                 int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
                 colorsList.add(color);
             }
+
+            System.out.println(words.values());
+
+            PieDataSet pieDataSet = new PieDataSet(pieChartList,"Crypto in your account");
+            pieDataSet.setColors(colorsList);
+            pieDataSet.setDrawIcons(false);
+            pieDataSet.setSliceSpace(10f);
+            pieDataSet.setIconsOffset(new MPPointF(0, 40));
+            pieDataSet.setSelectionShift(3f);
+            PieData pieData = new PieData(pieDataSet);
+
+            binding.portfolioChart.setData(pieData);
+            binding.portfolioChart.invalidate();
+
         }
-
-        PieDataSet pieDataSet = new PieDataSet(pieChartList,"");
-        pieDataSet.setColors(colorsList);
-        pieDataSet.setDrawIcons(false);
-        pieDataSet.setSliceSpace(10f);
-        pieDataSet.setIconsOffset(new MPPointF(0, 40));
-        pieDataSet.setSelectionShift(3f);
-        PieData pieData = new PieData(pieDataSet);
-
-        binding.portfolioChart.setData(pieData);
-        binding.portfolioChart.invalidate();
     }
 
     private void OnPortfolioBuy(View view){
@@ -201,7 +218,6 @@ public class WalletFragment extends Fragment {
                 localTr.setCryptoName(cryptoName.getText().toString());
                 localTr.setAmount(Float.parseFloat(amount.getText().toString()));
                 viewModel.registerATransaction(userID.getText().toString(),localTr);
-                setTotalAmmount();
                 setTransactionList();
                 dialog.dismiss();
             }
@@ -243,7 +259,6 @@ public class WalletFragment extends Fragment {
                 localTr.setCryptoName(cryptoName.getText().toString());
                 localTr.setAmount(Float.parseFloat(amount.getText().toString()));
                 viewModel.registerATransaction(userID.getText().toString(),localTr);
-                setTotalAmmount();
                 setTransactionList();
                 dialog.dismiss();
             }

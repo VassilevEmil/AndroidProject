@@ -11,7 +11,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.androidproject.DAO.UserLiveData;
-import com.example.androidproject.Entities.wallet.User;
+import com.example.androidproject.Entities.Wallet.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -23,10 +23,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import org.checkerframework.checker.units.qual.A;
-
-import java.util.ArrayList;
 
 public class UserDAO implements IUserDAO{
     private static final String collectionPath = "users";
@@ -112,7 +108,6 @@ public class UserDAO implements IUserDAO{
             docRef.update("email",newUser.getEmail());
             docRef.update("lastName",newUser.getLastName());
             docRef.update("firstName",newUser.getFirstName());
-            docRef.update("walletBallanceUSD",newUser.getWalletBallanceUSD());
     }
 
     @Override
@@ -170,7 +165,6 @@ public class UserDAO implements IUserDAO{
         user.setLastName(userParam.getLastName());
         user.setFirstName(userParam.getFirstName());
         user.setUid(uid);
-        user.setWalletBallanceUSD(0.0f);
 
 
         firebaseDatabase.collection(collectionPath).document(uid).set(user)

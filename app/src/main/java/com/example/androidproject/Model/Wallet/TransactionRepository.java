@@ -2,14 +2,11 @@ package com.example.androidproject.Model.Wallet;
 
 import android.app.Application;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.androidproject.DAO.Wallet.ITransactionsDAO;
 import com.example.androidproject.DAO.Wallet.TransactionsDAO;
-import com.example.androidproject.DAO.Wallet.UserDAO;
-import com.example.androidproject.Entities.wallet.Transaction;
-import com.google.firebase.auth.FirebaseUser;
+import com.example.androidproject.Entities.Wallet.Transaction;
 
 import java.util.List;
 

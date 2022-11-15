@@ -1,6 +1,4 @@
-package com.example.androidproject.Entities.wallet;
-
-import com.google.firebase.database.IgnoreExtraProperties;
+package com.example.androidproject.Entities.Wallet;
 
 import java.util.ArrayList;
 
@@ -10,27 +8,15 @@ public class User {
     private String email;
     private String firstName;
     private String lastName;
-    private float walletBallanceUSD;
 
     public User(){
     }
 
-    public User(String uid, String email, String firstName, String lastName, float walletBallanceUSD, ArrayList<String> cryptos, ArrayList<String> transactionsUID) {
+    public User(String uid, String email, String firstName, String lastName) {
         this.uid = uid;
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.walletBallanceUSD = walletBallanceUSD;
-    }
-
-
-    public float getWalletBallanceUSD() {
-        return walletBallanceUSD;
-    }
-
-
-    public void setWalletBallanceUSD(float walletBallanceUSD) {
-        this.walletBallanceUSD = walletBallanceUSD;
     }
 
     public String getEmail() {
@@ -74,7 +60,6 @@ public class User {
                 ", email='" + email + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", walletBallanceUSD=" + walletBallanceUSD +
                 '}';
     }
 }

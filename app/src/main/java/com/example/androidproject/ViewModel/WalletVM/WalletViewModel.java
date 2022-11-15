@@ -2,14 +2,14 @@ package com.example.androidproject.ViewModel.WalletVM;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.example.androidproject.Entities.wallet.Transaction;
-import com.example.androidproject.Entities.wallet.User;
+import com.example.androidproject.Entities.Wallet.Transaction;
+import com.example.androidproject.Entities.Wallet.User;
 import com.example.androidproject.Model.Wallet.TransactionRepository;
 import com.example.androidproject.Model.Wallet.UserRepository;
 import com.google.firebase.auth.FirebaseUser;
@@ -31,7 +31,7 @@ public class WalletViewModel extends AndroidViewModel  {
         transactionRepository.addTransaction(userUID,transaction);
     }
 
-    public void registerAccount(Activity activity, User user, String password)
+    public void registerAccount(Activity activity,User user, String password)
     {
         userRepository.registerAccount(activity,user,password);
     }
@@ -64,7 +64,7 @@ public class WalletViewModel extends AndroidViewModel  {
         userRepository.updateUser(user);
     }
 
-    public void loginAccount(Activity activity, String email, String password){
+    public void loginAccount(Activity activity,String email, String password){
         userRepository.loginAccount(activity, email, password);
     }
 }

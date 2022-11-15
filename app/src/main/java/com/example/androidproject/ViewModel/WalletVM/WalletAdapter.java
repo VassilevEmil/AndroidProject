@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.androidproject.Entities.wallet.Transaction;
+import com.example.androidproject.Entities.Wallet.Transaction;
 import com.example.androidproject.R;
 
 import java.util.ArrayList;
