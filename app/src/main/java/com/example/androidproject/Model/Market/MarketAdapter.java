@@ -17,6 +17,7 @@ import com.example.androidproject.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.DoubleToIntFunction;
 
 public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder> {
 
@@ -35,14 +36,17 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder
         return new ViewHolder(view);
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "DefaultLocale"})
     @Override
     public void onBindViewHolder(@NonNull MarketAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+
+        double percentage = (markets.get(position).getPriceChangePercentage24h());
+
     holder.rank.setText(Integer.toString(markets.get(position).getMarketCapRank()));
     holder.symbol.setText(markets.get(position).getSymbol());
-    holder.currentPrice.setText(String.valueOf(markets.get(position).getCurrentPrice()));
-    holder.price_change_percentage_24h.setText(String.valueOf(markets.get(position).getPriceChangePercentage24h()));
-    holder.market_cap.setText(String.valueOf(markets.get(position).getMarketCap()));
+    holder.currentPrice.setText(String.format("%.3f", markets.get(position).getCurrentPrice()));
+    holder.price_change_percentage_24h.setText(String.format("%.2f", percentage) + "%");
+    holder.market_cap.setText((markets.get(position).getMarketCap() / 1000000000 + "B"));
     }
 
     @Override
