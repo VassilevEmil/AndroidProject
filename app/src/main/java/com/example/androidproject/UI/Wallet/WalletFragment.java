@@ -152,10 +152,11 @@ public class WalletFragment extends Fragment {
         Map<String, PieEntry> words = new HashMap<>();
         List<Integer> colorsList = new ArrayList<>();
 
-        for(Transaction item: transactionsList){
-            if(item.isBuy()){
-                List<PieEntry> pieChartList = new ArrayList<>();
 
+        for(Transaction item: transactionsList){
+            List<PieEntry> pieChartList = new ArrayList<>();
+            System.out.println(item.isBuy());
+            if(item.isBuy()){
                 words.compute(item.getCryptoName(), (key,value) -> value ==null? new PieEntry(item.getAmount(),item.getCryptoName()) : new PieEntry(item.getAmount()+value.getValue(),item.getCryptoName()));
 
                 pieChartList.addAll(words.values());
@@ -163,17 +164,28 @@ public class WalletFragment extends Fragment {
                 int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
                 colorsList.add(color);
 
-                PieDataSet pieDataSet = new PieDataSet(pieChartList,"Crypto in your account");
-                pieDataSet.setColors(colorsList);
-                pieDataSet.setDrawIcons(false);
-                pieDataSet.setSliceSpace(10f);
-                pieDataSet.setIconsOffset(new MPPointF(0, 40));
-                pieDataSet.setSelectionShift(3f);
-                PieData pieData = new PieData(pieDataSet);
+            }else if(!item.isBuy()){
+                words.compute(item.getCryptoName(), (key,value) -> value ==null? new PieEntry(-1*item.getAmount(),item.getCryptoName()) : new PieEntry(item.getAmount()-value.getValue(),item.getCryptoName()));
 
-                binding.portfolioChart.setData(pieData);
-                binding.portfolioChart.invalidate();
+                pieChartList.addAll(words.values());
+                Random rnd = new Random();
+                int color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+                colorsList.add(color);
             }
+
+            System.out.println(words.values());
+
+            PieDataSet pieDataSet = new PieDataSet(pieChartList,"Crypto in your account");
+            pieDataSet.setColors(colorsList);
+            pieDataSet.setDrawIcons(false);
+            pieDataSet.setSliceSpace(10f);
+            pieDataSet.setIconsOffset(new MPPointF(0, 40));
+            pieDataSet.setSelectionShift(3f);
+            PieData pieData = new PieData(pieDataSet);
+
+            binding.portfolioChart.setData(pieData);
+            binding.portfolioChart.invalidate();
+
         }
     }
 
