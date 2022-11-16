@@ -60,4 +60,9 @@ public class UserRepository {
     public void loginAccount(Activity activity, String email, String password){
         userDAO.loginAccount(activity,email,password);
     }
+
+    public void signOut()
+    {
+        userDAO.signOut();
+    }
 }
