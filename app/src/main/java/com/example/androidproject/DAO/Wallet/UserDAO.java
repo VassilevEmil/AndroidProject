@@ -158,6 +158,11 @@ public class UserDAO implements IUserDAO{
         }
     }
 
+    @Override
+    public void signOut() {
+        firebaseAuth.signOut();
+    }
+
     private void createUser(String uid, User userParam) {
 
         User user = new User();
