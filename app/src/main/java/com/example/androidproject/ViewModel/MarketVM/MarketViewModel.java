@@ -18,7 +18,7 @@ public class MarketViewModel extends ViewModel {
     }
 
     public void getMarket(){
-        repository.loadMarket("usd", "market_cap_desc", 10, "24h");
+        repository.loadMarket("usd", "market_cap_desc", 30, "24h");
     }
 
 

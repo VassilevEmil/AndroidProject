@@ -36,7 +36,6 @@ public class MarketFragment extends Fragment {
     private FragmentMarketBinding binding;
     private MarketViewModel viewModel;
     RecyclerView recyclerView;
-    List<Market> marketList = new ArrayList<>();
     MarketAdapter adapter;
 
 
