@@ -6,10 +6,13 @@ import android.widget.Toast;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.androidproject.DAO.Market.MarketDAO;
 import com.example.androidproject.Entities.Market.Market;
+import com.example.androidproject.Entities.NewsModel;
 import com.example.androidproject.UI.Responses.MarketResponse;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -20,14 +23,16 @@ import retrofit2.http.Query;
 public class MarketRepository {
 
     private static MarketRepository instance;
-    private final MutableLiveData<List<Market>> marketData;
+    private MutableLiveData<List<Market>> marketData;
+    private MarketDAO marketDAO;
     
     public MarketRepository(){
         marketData = new MutableLiveData<>();
+        this.marketDAO = MarketDAO.getInstance();
     }
 
     public MutableLiveData<List<Market>> getMarketData(){
-        return marketData;
+        return marketDAO.getMarkets();
     }
     
     public static synchronized MarketRepository getInstance(){
@@ -45,7 +50,8 @@ public class MarketRepository {
             public void onResponse(Call<List<Market>> call, Response<List<Market>> response) {
 
                 if (response.isSuccessful()) {
-                    marketData.setValue(response.body());
+                    marketDAO.addMarkets(response.body());
+                    Log.d("SUP", "MARKET DATA: " + marketData);
                     }
             }
 
@@ -55,6 +61,4 @@ public class MarketRepository {
                 Log.d("mresponse", "Response: fail " + t.getMessage() );}
         });
     }
-
-
 }

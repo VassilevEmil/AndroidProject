@@ -42,12 +42,19 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder
 
         double percentage = (markets.get(position).getPriceChangePercentage24h());
 
-    holder.rank.setText(Integer.toString(markets.get(position).getMarketCapRank()));
-    holder.symbol.setText(markets.get(position).getSymbol());
-    holder.currentPrice.setText(String.format("%.3f", markets.get(position).getCurrentPrice()));
-    holder.price_change_percentage_24h.setText(String.format("%.2f", percentage) + "%");
-    holder.market_cap.setText((markets.get(position).getMarketCap() / 1000000000 + "B"));
+        holder.rank.setText(Integer.toString(markets.get(position).getMarketCapRank()));
+        holder.symbol.setText(markets.get(position).getSymbol());
+        holder.currentPrice.setText(String.format("%.3f", markets.get(position).getCurrentPrice()));
+        if(percentage > 0) {
+            holder.price_change_percentage_24h.setTextColor(context.getResources().getColor(R.color.green));
+            holder.price_change_percentage_24h.setText("+" + String.format("%.2f", percentage) + "%");
+        } else {
+            holder.price_change_percentage_24h.setTextColor(context.getResources().getColor(R.color.red));
+            holder.price_change_percentage_24h.setText(String.format("%.2f", percentage) + "%");
+        }
+        holder.market_cap.setText((markets.get(position).getMarketCap() / 1000000000 + "B"));
     }
+
 
     @Override
     public int getItemCount() {
