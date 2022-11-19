@@ -92,7 +92,7 @@ public class WalletFragment extends Fragment {
                     userID.setText(firebaseUser.getUid());
                 }else{
                     //test until the login will be done
-                    //viewModel.loginAccount((Activity) root.getContext(),"goformusicro@gmail.com","test1234567");
+                    viewModel.loginAccount((Activity) root.getContext(),"goformusicro@gmail.com","test1234567");
                 }
 
                 setTransactionList();

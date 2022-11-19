@@ -5,9 +5,11 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.androidproject.DAO.News.NewsDao;
 import com.example.androidproject.Entities.NewsModel;
 import com.example.androidproject.UI.Responses.NewsResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -18,10 +20,12 @@ public class NewsRepository {
 
 
     private static NewsRepository instance;
-    private final MutableLiveData<List<NewsModel>> searchedNews;
+    private MutableLiveData<List<NewsModel>> searchedNews;
+    private NewsDao newsDao;
 
     public NewsRepository() {
         searchedNews = new MutableLiveData<>();
+        this.newsDao = NewsDao.getInstance();
     }
 
     public MutableLiveData<List<NewsModel>> getSearchedNews(){
@@ -43,7 +47,8 @@ public class NewsRepository {
             @Override
             public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
                 if (response.isSuccessful()){
-                    searchedNews.setValue(response.body().getNews());
+                   // searchedNews.setValue(response.body().getNews());
+                    saveNews(response.body().getNews());
                     System.out.println(response.body().getNews());
                 }
             }
@@ -55,6 +60,11 @@ public class NewsRepository {
             }
         });
     }
+    public void saveNews(ArrayList<NewsModel> newsModels){
+        newsDao.addNews(newsModels);
+        searchedNews = newsDao.getNews();
+       // System.out.println("eeeeeeeeeeeeeeeeeeeeee" + newsDao.getNews());
 
+    }
 
 }
