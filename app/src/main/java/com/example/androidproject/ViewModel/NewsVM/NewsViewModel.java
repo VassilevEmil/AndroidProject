@@ -27,6 +27,7 @@ public class NewsViewModel extends ViewModel {
     public MutableLiveData<List<NewsModel>> getSearchedNews()
     {
         return repository.getSearchedNews();
+
     }
 
 
