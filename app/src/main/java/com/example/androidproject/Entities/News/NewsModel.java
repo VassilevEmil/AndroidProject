@@ -1,4 +1,4 @@
-package com.example.androidproject.Entities;
+package com.example.androidproject.Entities.News;
 
 
     // Model class for the news

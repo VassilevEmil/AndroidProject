@@ -1,34 +1,27 @@
 package com.example.androidproject.UI.News;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.androidproject.Entities.NewsModel;
+import com.example.androidproject.Entities.News.NewsModel;
 import com.example.androidproject.Model.NewsModel.NewsAdapter;
-import com.example.androidproject.Model.NewsModel.NewsServiceGenerator;
-import com.example.androidproject.Model.utils.Credentials;
 import com.example.androidproject.R;
-import com.example.androidproject.UI.Responses.NewsResponse;
 import com.example.androidproject.ViewModel.NewsVM.NewsViewModel;
 import com.example.androidproject.databinding.FragmentNewsBinding;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class NewsFragment extends Fragment {
 
@@ -49,10 +42,14 @@ public class NewsFragment extends Fragment {
         recyclerView = root.findViewById(R.id.recycleviewofNews);
         recyclerView.hasFixedSize();
 
-         viewModel.getNews();
-        viewModel.getSearchedNews().observeForever(newsList->{
-            adapter = new NewsAdapter(binding.getRoot().getContext(),newsList);
-            recyclerView.setAdapter(adapter);
+
+        viewModel.getSearchedNews().observe(getViewLifecycleOwner(),new Observer<List<NewsModel>>() {
+            @Override
+            public void onChanged(List<NewsModel> newsModels) {
+                System.out.println(newsModels);
+                adapter = new NewsAdapter(binding.getRoot().getContext(),newsModels);
+                recyclerView.setAdapter(adapter);
+            }
         });
 
 

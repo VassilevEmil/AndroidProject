@@ -1,10 +1,8 @@
 package com.example.androidproject.UI.Responses;
 
 import com.example.androidproject.Entities.Market.Market;
-import com.example.androidproject.Entities.NewsModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MarketResponse {
 

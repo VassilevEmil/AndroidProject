@@ -3,23 +3,19 @@ package com.example.androidproject.Model.NewsModel;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.androidproject.Entities.NewsModel;
+import com.example.androidproject.Entities.News.NewsModel;
 import com.example.androidproject.R;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +43,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     public void onBindViewHolder(NewsAdapter.ViewHolder viewHolder, @SuppressLint("RecyclerView") int i) {
 
 
-        // method for opening a new intent when clicking to see a news
 
 
         viewHolder.mtime.setText("Published at:-" + modelList.get(i).getPubDate());
@@ -61,14 +56,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
         Glide.with(viewHolder.itemView.getContext()).load(modelList.get(i).getImage_url()).error(R.drawable.ic_launcher_background).into(viewHolder.imageView);
 
-        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, webView.class);
-                intent.putExtra("url", modelList.get(i).getUrl());
-                context.startActivity(intent);
-            }
-        });
+        viewHolder.newActivity(i);
+
 
     }
 
@@ -92,5 +81,23 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             mtime = itemView.findViewById(R.id.time);
             imageView = itemView.findViewById(R.id.imageview);
         }
+
+        // method for opening a new intent when clicking to see a news
+//
+
+        public void newActivity(int i){
+
+
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, webView.class);
+                intent.putExtra("url", modelList.get(i).getUrl());
+                context.startActivity(intent);
+            }
+        });
+
+        }
+
     }
 }

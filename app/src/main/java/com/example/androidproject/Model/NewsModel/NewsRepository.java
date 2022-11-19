@@ -2,13 +2,13 @@ package com.example.androidproject.Model.NewsModel;
 
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.androidproject.DAO.News.NewsDao;
-import com.example.androidproject.Entities.NewsModel;
+import com.example.androidproject.Entities.News.NewsModel;
 import com.example.androidproject.UI.Responses.NewsResponse;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +49,7 @@ public class NewsRepository {
                 if (response.isSuccessful()){
                    // searchedNews.setValue(response.body().getNews());
                     saveNews(response.body().getNews());
-                    System.out.println(response.body().getNews());
+                    //System.out.println(response.body().getNews());
                 }
             }
 
@@ -61,8 +61,9 @@ public class NewsRepository {
         });
     }
     public void saveNews(ArrayList<NewsModel> newsModels){
-        newsDao.addNews(newsModels);
+        //newsDao.addNews(newsModels);
         searchedNews = newsDao.getNews();
+        // System.out.println(newsDao.getNews().getValue());
 
     }
 
