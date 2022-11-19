@@ -49,7 +49,7 @@ public class NewsFragment extends Fragment {
         recyclerView = root.findViewById(R.id.recycleviewofNews);
         recyclerView.hasFixedSize();
 
-        viewModel.getNews();
+         viewModel.getNews();
         viewModel.getSearchedNews().observeForever(newsList->{
             adapter = new NewsAdapter(binding.getRoot().getContext(),newsList);
             recyclerView.setAdapter(adapter);
@@ -64,20 +64,20 @@ public class NewsFragment extends Fragment {
 
     }
 
-    private void findNews() {
-        NewsServiceGenerator.getNewsApi().searchNews(Credentials.API_KEY_NEWS, "crypto", "en").enqueue(new Callback<NewsResponse>() {
-            @Override
-            public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
-                if (response.isSuccessful()){
-                    //newsModel.add(response.body().getNews());
-                    System.out.println("\n something????"+response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<NewsResponse> call, Throwable t) {
-                System.out.println(t.getMessage());
-            }
-        });
-    }
+//    private void findNews() {
+//        NewsServiceGenerator.getNewsApi().searchNews(Credentials.API_KEY_NEWS, "crypto", "en").enqueue(new Callback<NewsResponse>() {
+//            @Override
+//            public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
+//                if (response.isSuccessful()){
+//                    //newsModel.add(response.body().getNews());
+//                    System.out.println("\n something????"+response.body());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<NewsResponse> call, Throwable t) {
+//                System.out.println(t.getMessage());
+//            }
+//        });
+//    }
 }

@@ -29,4 +29,5 @@ public class NewsViewModel extends ViewModel {
         return repository.getSearchedNews();
     }
 
+
 }

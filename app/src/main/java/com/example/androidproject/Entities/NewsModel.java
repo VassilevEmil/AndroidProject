@@ -11,7 +11,7 @@ public class NewsModel {
     private String title, description, content, pubDate, image_url, url;
     private ArrayList<String> creator, category;
 
-    private NewsModel()
+    public NewsModel()
     {
         this.title = "";
         this.creator = new ArrayList<>();
@@ -22,6 +22,10 @@ public class NewsModel {
         this.category = new ArrayList<>();
         this.url = "";
     }
+//
+//    public NewsModel(){
+//
+//    }
 
     public NewsModel(String title,ArrayList<String> creator, String description, String content, String pubDate, String image_url, ArrayList<String> category, String url) {
         this.title = title;
