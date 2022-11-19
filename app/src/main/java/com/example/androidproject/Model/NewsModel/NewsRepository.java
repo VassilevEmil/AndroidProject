@@ -63,7 +63,6 @@ public class NewsRepository {
     public void saveNews(ArrayList<NewsModel> newsModels){
         newsDao.addNews(newsModels);
         searchedNews = newsDao.getNews();
-       // System.out.println("eeeeeeeeeeeeeeeeeeeeee" + newsDao.getNews());
 
     }
 
