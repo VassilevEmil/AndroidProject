@@ -43,8 +43,8 @@ public class NewsDao implements INewsDao {
     @Override
     public void addNews(List<NewsModel> newsModel) {
         Map<String, Object> model = new HashMap<>();
-         System.out.println(newsModel);
-        System.out.println("eeeeeeeeeeeeeeeeeeeee");
+       //  System.out.println(newsModel);
+
 
         for(NewsModel item:newsModel){
             firestore.collection(collectionPath).document().set(item).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -78,7 +78,6 @@ public class NewsDao implements INewsDao {
                         Log.d(TAG, document.getId() + "......" + document.getData());
                         NewsModel temp = document.toObject(NewsModel.class);
                         local.add(temp);
-                        System.out.println("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
 
                     }
                     newsModel.postValue(local);

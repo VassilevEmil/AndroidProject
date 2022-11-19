@@ -40,7 +40,6 @@ public class NewsFragment extends Fragment {
     NewsAdapter adapter;
 
 
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(NewsViewModel.class);
         binding = FragmentNewsBinding.inflate(inflater, container, false);
@@ -55,29 +54,10 @@ public class NewsFragment extends Fragment {
             recyclerView.setAdapter(adapter);
         });
 
-
         recyclerView.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
-
-
 
         return root;
 
     }
 
-//    private void findNews() {
-//        NewsServiceGenerator.getNewsApi().searchNews(Credentials.API_KEY_NEWS, "crypto", "en").enqueue(new Callback<NewsResponse>() {
-//            @Override
-//            public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
-//                if (response.isSuccessful()){
-//                    //newsModel.add(response.body().getNews());
-//                    System.out.println("\n something????"+response.body());
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<NewsResponse> call, Throwable t) {
-//                System.out.println(t.getMessage());
-//            }
-//        });
-//    }
 }
