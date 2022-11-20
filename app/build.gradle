@@ -39,6 +39,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:21.1.0'
     implementation 'com.google.firebase:firebase-firestore:24.4.0'
     implementation 'androidx.preference:preference:1.1.+'
+    implementation 'com.google.firebase:firebase-common-ktx:20.2.0'
     androidTestImplementation 'org.junit.jupiter:junit-jupiter'
     androidTestImplementation 'org.junit.jupiter:junit-jupiter'
     androidTestImplementation 'org.junit.jupiter:junit-jupiter'
