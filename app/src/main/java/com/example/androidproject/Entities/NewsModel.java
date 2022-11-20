@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class NewsModel {
 
-    private String title, description, content, pubDate, image_url, url;
+    private String title, description, content, pubDate, image_url, link;
     private ArrayList<String> creator, category;
 
     public NewsModel()
@@ -20,14 +20,14 @@ public class NewsModel {
         this.pubDate = "";
         this.image_url = "";
         this.category = new ArrayList<>();
-        this.url = "";
+        this.link = "";
     }
 //
 //    public NewsModel(){
 //
 //    }
 
-    public NewsModel(String title,ArrayList<String> creator, String description, String content, String pubDate, String image_url, ArrayList<String> category, String url) {
+    public NewsModel(String title,ArrayList<String> creator, String description, String content, String pubDate, String image_url, ArrayList<String> category, String link) {
         this.title = title;
         this.creator = creator;
         this.description = description;
@@ -35,7 +35,7 @@ public class NewsModel {
         this.pubDate = pubDate;
         this.image_url = image_url;
         this.category = category;
-        this.url = url;
+        this.link = link;
     }
 
     public String getTitle() {
@@ -66,8 +66,8 @@ public class NewsModel {
         return category;
     }
 
-    public String getUrl() {
-        return url;
+    public String getLink() {
+        return link;
     }
 
     public void setTitle(String title) {
@@ -92,8 +92,8 @@ public class NewsModel {
     }
 
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setLink(String link) {
+        this.link = link;
     }
 
     @Override
@@ -101,7 +101,7 @@ public class NewsModel {
         return "NewsModel{" +
 
                 ", image_url='" + image_url + '\'' +
-                ", url='" + url + '\'' +
+                ", link='" + link + '\'' +
                 '}';
     }
 }

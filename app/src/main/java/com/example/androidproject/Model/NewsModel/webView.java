@@ -9,11 +9,16 @@ import android.webkit.WebViewClient;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.androidproject.Entities.NewsModel;
 import com.example.androidproject.R;
+
+import java.util.List;
 
 public class webView extends AppCompatActivity {
 
     WebView webView;
+    List<NewsModel> modelList;
+    NewsModel test;
 
 
     @SuppressLint("MissingInflatedId")
@@ -26,10 +31,13 @@ public class webView extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        String url = intent.getStringExtra("url");
+        String link = intent.getStringExtra("link");
+        System.out.println("eeeeeeeeeeeeeeee" + link);
 
-        webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl(url);
+            webView.setWebViewClient(new WebViewClient());
+            webView.loadUrl(link);
+            webView.getSettings().setJavaScriptEnabled(true);
+
 
     }
 

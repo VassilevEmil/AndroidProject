@@ -33,6 +33,12 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        // activity for webview
+        <activity
+            android:name=".Model.NewsModel.webView"
+            android:label="@string/default_web_client_id">
+        </activity>
     </application>
 
 </manifest>

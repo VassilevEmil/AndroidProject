@@ -47,12 +47,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     public void onBindViewHolder(NewsAdapter.ViewHolder viewHolder, @SuppressLint("RecyclerView") int i) {
 
 
-        // method for opening a new intent when clicking to see a news
-
 
         viewHolder.mtime.setText("Published at:-" + modelList.get(i).getPubDate());
         viewHolder.mheading.setText(modelList.get(i).getTitle());
 
+
+//
 //        if(modelList.get(i).getCreator()!=null){
 //            viewHolder.mcreator.setText(modelList.get(i).getCreator().get(0));
 //        }
@@ -61,14 +61,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
       Glide.with(viewHolder.itemView.getContext()).load(modelList.get(i).getImage_url()).error(R.drawable.ic_launcher_background).into(viewHolder.imageView);
 
-//        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(context, webView.class);
-//                intent.putExtra("url", modelList.get(i).getUrl());
-//                context.startActivity(intent);
-//            }
-//        });
+        System.out.println("hereeeeee" + modelList.get(i).getLink());
+
+        viewHolder.displayNews(viewHolder, i);
 
     }
 
@@ -92,5 +87,24 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             mtime = itemView.findViewById(R.id.time);
             imageView = itemView.findViewById(R.id.imageview);
         }
-    }
+
+        // method for opening a new intent when clicking to see a news
+
+        public void displayNews(ViewHolder viewHolder, int i){
+
+                   viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, webView.class);
+                intent.putExtra("link", modelList.get(i).getLink());
+                context.startActivity(intent);
+                System.out.println(modelList.get(i).getLink() + "bbbbbbbbbbbbbbbbbbbbb");
+            }
+        });
+        }
+
+
+        }
+
+
 }
