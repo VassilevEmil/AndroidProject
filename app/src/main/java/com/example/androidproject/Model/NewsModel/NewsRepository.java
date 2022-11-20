@@ -29,7 +29,7 @@ public class NewsRepository {
     }
 
     public MutableLiveData<List<NewsModel>> getSearchedNews(){
-        return searchedNews;
+        return newsDao.getNews();
     }
 
     public static synchronized NewsRepository getInstance() {

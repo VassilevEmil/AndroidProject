@@ -53,22 +53,22 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         viewHolder.mtime.setText("Published at:-" + modelList.get(i).getPubDate());
         viewHolder.mheading.setText(modelList.get(i).getTitle());
 
-        if(modelList.get(i).getCreator()!=null){
-            viewHolder.mcreator.setText(modelList.get(i).getCreator().get(0));
-        }
+//        if(modelList.get(i).getCreator()!=null){
+//            viewHolder.mcreator.setText(modelList.get(i).getCreator().get(0));
+//        }
 
         viewHolder.mcontent.setText(modelList.get(i).getContent());
 
-        Glide.with(viewHolder.itemView.getContext()).load(modelList.get(i).getImage_url()).error(R.drawable.ic_launcher_background).into(viewHolder.imageView);
+      Glide.with(viewHolder.itemView.getContext()).load(modelList.get(i).getImage_url()).error(R.drawable.ic_launcher_background).into(viewHolder.imageView);
 
-        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, webView.class);
-                intent.putExtra("url", modelList.get(i).getUrl());
-                context.startActivity(intent);
-            }
-        });
+//        viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(context, webView.class);
+//                intent.putExtra("url", modelList.get(i).getUrl());
+//                context.startActivity(intent);
+//            }
+//        });
 
     }
 
