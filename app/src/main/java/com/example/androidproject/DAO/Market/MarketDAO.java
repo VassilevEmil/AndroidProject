@@ -36,7 +36,7 @@ public class MarketDAO implements IMarketDAO{
     private static final String collectionPath = "Markets";
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
-    ArrayList<Market> local = new ArrayList<>();
+
 
 
     private MarketDAO() {
@@ -65,12 +65,10 @@ public class MarketDAO implements IMarketDAO{
             myRef.addValueEventListener(new ValueEventListener() {
          @Override
          public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-             for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+             ArrayList<Market> local = new ArrayList<>();
+             for (DataSnapshot dataSnapshot : snapshot.child("Crypto").getChildren()){
                  Market market = dataSnapshot.getValue(Market.class);
                  local.add(market);
-                 System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +
-                         " " + market.getPriceChangePercentage24h());
              }
              marketModel.postValue(local);
          }
