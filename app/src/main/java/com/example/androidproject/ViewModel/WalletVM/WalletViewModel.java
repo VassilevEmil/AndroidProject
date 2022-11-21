@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.androidproject.Entities.Wallet.Transaction;
 import com.example.androidproject.Entities.Wallet.User;
+import com.example.androidproject.Model.Login_Register.LoginRegisterRepository;
 import com.example.androidproject.Model.Wallet.TransactionRepository;
 import com.example.androidproject.Model.Wallet.UserRepository;
 import com.google.firebase.auth.FirebaseUser;
@@ -18,6 +19,7 @@ import java.util.List;
 
 public class WalletViewModel extends AndroidViewModel  {
     UserRepository userRepository;
+    LoginRegisterRepository repository;
     TransactionRepository transactionRepository;
 
     public WalletViewModel(Application app){
@@ -70,6 +72,6 @@ public class WalletViewModel extends AndroidViewModel  {
 
     public void signOut()
     {
-        userRepository.signOut();
+        repository.signOut();
     }
 }

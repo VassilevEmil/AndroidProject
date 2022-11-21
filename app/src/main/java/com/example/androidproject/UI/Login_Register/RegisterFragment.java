@@ -2,6 +2,7 @@ package com.example.androidproject.UI.Login_Register;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,8 +54,8 @@ public class RegisterFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        emailEdit = view.findViewById(R.id.emailEditSignIn);
-        passEdit = view.findViewById(R.id.passEditSignIn);
+        emailEdit = view.findViewById(R.id.emailEditSignUp);
+        passEdit = view.findViewById(R.id.passEditSignUp);
         signInText = view.findViewById(R.id.signInText);
         signUpBtn = view.findViewById(R.id.signUpBtn);
 
@@ -72,6 +73,7 @@ public class RegisterFragment extends Fragment {
             public void onClick(View view) {
                 String email = emailEdit.getText().toString();
                 String pass = passEdit.getText().toString();
+                Log.d("eee", "onClick: " + email + pass);
 
                 if (!email.isEmpty() && !pass.isEmpty()){
                     viewModel.register(email, pass);

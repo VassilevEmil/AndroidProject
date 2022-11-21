@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 
 import com.example.androidproject.R;
 import com.example.androidproject.ViewModel.WalletVM.WalletViewModel;
@@ -31,6 +32,8 @@ public class SettingsFragment extends Fragment {
     private TextView darkModeText;
     private TextView userDetails;
     private Button signOutButton;
+    private NavController navController;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentSettingsBinding.inflate(inflater, container, false);
@@ -69,6 +72,7 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 walletViewModel.signOut();
+                navController.navigate(R.id.action_signOutFragment_to_signInFragment);
             }
         });
 

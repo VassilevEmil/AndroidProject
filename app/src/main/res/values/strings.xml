@@ -15,4 +15,6 @@
     <string name="sign_up">Sign UP</string>
     <string name="not_registered_yet_sign_up">Not Registered Yet ? Sign Up</string>
     <string name="have_an_account">Have an account? Sign In</string>
+    <string name="sign_out">Sign out</string>
+    <string name="change_to_dark_mode">Change to Dark Mode</string>
 </resources>
