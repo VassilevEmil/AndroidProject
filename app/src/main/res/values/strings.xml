@@ -9,4 +9,8 @@
     <string name="price">price</string>
     <string name="percentage">24H</string>
     <string name="market_cap">market cap</string>
+    <string name="enter_your_email_address">Enter Your Email address</string>
+    <string name="enter_your_password">Enter Your password</string>
+    <string name="sign_in">Sign IN</string>
+    <string name="not_registered_yet_sign_up">Not Registered Yet ? Sign Up</string>
 </resources>

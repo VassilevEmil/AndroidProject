@@ -42,6 +42,7 @@ public class MarketFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
+
         viewModel = new ViewModelProvider(this).get(MarketViewModel.class);
         binding = FragmentMarketBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
