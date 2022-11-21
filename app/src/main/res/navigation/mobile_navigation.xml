@@ -12,7 +12,6 @@
         tools:layout="@layout/fragment_sign_in">
         <action
             android:id="@+id/action_signIn_to_main"
-            android:name="com.example.androidproject.UI.Login_Register.LoginFragment"
             app:destination="@id/navigation_market" />
         <action
             android:id="@+id/action_signInFragment_to_signUpFragment"
@@ -21,8 +20,8 @@
 
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.androidproject.UI.Market."
-        android:label="fragment_sign_in"
+        android:name="com.example.androidproject.UI.Login_Register.RegisterFragment"
+        android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
             android:id="@+id/action_signUpFragment_to_signInFragment"
