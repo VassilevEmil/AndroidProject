@@ -1,24 +1,17 @@
 package com.example.androidproject.Model.Market;
 
 import android.util.Log;
-import android.widget.Toast;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.androidproject.DAO.Market.MarketDAO;
 import com.example.androidproject.Entities.Market.Market;
-import com.example.androidproject.Entities.NewsModel;
-import com.example.androidproject.UI.Responses.MarketResponse;
-import com.google.gson.Gson;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Query;
 
 public class MarketRepository {
 

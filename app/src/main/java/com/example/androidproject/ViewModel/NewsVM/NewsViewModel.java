@@ -1,11 +1,10 @@
 package com.example.androidproject.ViewModel.NewsVM;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.androidproject.Model.NewsModel.NewsRepository;
-import com.example.androidproject.Entities.NewsModel;
+import com.example.androidproject.Entities.News.NewsModel;
 import com.example.androidproject.Model.utils.Credentials;
 
 import java.util.List;

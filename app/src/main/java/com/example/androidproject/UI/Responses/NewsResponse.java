@@ -2,9 +2,8 @@ package com.example.androidproject.UI.Responses;
 
 
     // class for getting crypto news requests in english (News list)
-import android.widget.ArrayAdapter;
 
-import com.example.androidproject.Entities.NewsModel;
+import com.example.androidproject.Entities.News.NewsModel;
 
 import java.util.ArrayList;
 

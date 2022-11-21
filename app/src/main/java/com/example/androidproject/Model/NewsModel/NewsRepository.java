@@ -2,11 +2,10 @@ package com.example.androidproject.Model.NewsModel;
 
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.androidproject.DAO.News.NewsDao;
-import com.example.androidproject.Entities.NewsModel;
+import com.example.androidproject.Entities.News.NewsModel;
 import com.example.androidproject.UI.Responses.NewsResponse;
 
 import java.util.ArrayList;
