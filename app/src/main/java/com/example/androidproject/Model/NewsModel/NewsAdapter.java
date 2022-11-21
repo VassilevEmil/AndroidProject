@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,21 +48,25 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     public void onBindViewHolder(NewsAdapter.ViewHolder viewHolder, @SuppressLint("RecyclerView") int i) {
 
 
-
         viewHolder.mtime.setText("Published at:-" + modelList.get(i).getPubDate());
         viewHolder.mheading.setText(modelList.get(i).getTitle());
 
 
-//
+
 //        if(modelList.get(i).getCreator()!=null){
 //            viewHolder.mcreator.setText(modelList.get(i).getCreator().get(0));
-//        }
+//            }
+
+//        else if (modelList.get(i).getCreator().isEmpty()){
+//            viewHolder.mcreator.setText(modelList.get(i).getAuthor());
+//        };
+
 
         viewHolder.mcontent.setText(modelList.get(i).getContent());
 
       Glide.with(viewHolder.itemView.getContext()).load(modelList.get(i).getImage_url()).error(R.drawable.ic_launcher_background).into(viewHolder.imageView);
 
-        System.out.println("hereeeeee" + modelList.get(i).getLink());
+      //  System.out.println("hereeeeee" + modelList.get(i).getLink());
 
         viewHolder.displayNews(viewHolder, i);
 
@@ -74,7 +79,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView mheading, mcontent, mcreator, mtime;
+        TextView mheading, mcontent, mcreator, mtime, mauthor;
         CardView cardView;
         ImageView imageView;
 
@@ -86,6 +91,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             mcreator = itemView.findViewById(R.id.author);
             mtime = itemView.findViewById(R.id.time);
             imageView = itemView.findViewById(R.id.imageview);
+          //  mauthor = itemView.findViewById(R.id.author);
         }
 
         // method for opening a new intent when clicking to see a news
@@ -98,7 +104,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
                 Intent intent = new Intent(context, webView.class);
                 intent.putExtra("link", modelList.get(i).getLink());
                 context.startActivity(intent);
-                System.out.println(modelList.get(i).getLink() + "bbbbbbbbbbbbbbbbbbbbb");
+             //   System.out.println(modelList.get(i).getLink() + "bbbbbbbbbbbbbbbbbbbbb");
             }
         });
         }

@@ -10,6 +10,7 @@ public class NewsModel {
 
     private String title, description, content, pubDate, image_url, link;
     private ArrayList<String> creator, category;
+    private String author;
 
     public NewsModel()
     {
@@ -21,6 +22,7 @@ public class NewsModel {
         this.image_url = "";
         this.category = new ArrayList<>();
         this.link = "";
+        this.author = "";
     }
 //
 //    public NewsModel(){
@@ -69,7 +71,9 @@ public class NewsModel {
     public String getLink() {
         return link;
     }
-
+    public String getAuthor(){
+        return author;
+    }
     public void setTitle(String title) {
         this.title = title;
     }
@@ -91,6 +95,15 @@ public class NewsModel {
         this.image_url = image_url;
     }
 
+    public void setAuthor(String author){
+        this.author = author;
+    }
+
+
+
+    public void setCreator(java.util.ArrayList<String> creator) {
+        this.creator = creator;
+    }
 
     public void setLink(String link) {
         this.link = link;
