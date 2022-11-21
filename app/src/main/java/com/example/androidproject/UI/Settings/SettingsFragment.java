@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -14,11 +15,16 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
+import com.example.androidproject.Entities.Wallet.User;
 import com.example.androidproject.R;
+import com.example.androidproject.ViewModel.Login_RegisterVM.LoginRegisterVM;
 import com.example.androidproject.ViewModel.WalletVM.WalletViewModel;
 import com.example.androidproject.databinding.FragmentSettingsBinding;
 import com.example.androidproject.databinding.FragmentWalletBinding;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import lombok.NonNull;
@@ -27,12 +33,15 @@ public class SettingsFragment extends Fragment {
 
     private FragmentSettingsBinding binding;
     private WalletViewModel walletViewModel;
+    private LoginRegisterVM vm;
+    private EditText emailEdit, passEdit;
 
     private Switch darkModeSwitch;
     private TextView darkModeText;
     private TextView userDetails;
     private Button signOutButton;
     private NavController navController;
+     FirebaseAuth auth;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -44,6 +53,10 @@ public class SettingsFragment extends Fragment {
         darkModeText = root.findViewById(R.id.navigation_settings_darkMode);
         userDetails = root.findViewById(R.id.navigation_settings_user_details);
         signOutButton = root.findViewById(R.id.navigation_settings_sign_out);
+
+
+
+
 
         darkModeSwitch.setOnCheckedChangeListener((compoundButton, isSwitch) -> {
             if(isSwitch){
@@ -71,8 +84,11 @@ public class SettingsFragment extends Fragment {
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
                 walletViewModel.signOut();
-                navController.navigate(R.id.action_signOutFragment_to_signInFragment);
+                Navigation.findNavController(view).navigate(R.id.action_signOutFragment_to_signInFragment);
             }
         });
 
