@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
                 R.id.navigation_portfolio,
                 R.id.navigation_news,
                 R.id.navigation_settings,
-                R.id.signInFragment)
+                R.id.signInFragment,
+                R.id.signUpFragment)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                     default: navView.setVisibility(View.VISIBLE);
                     break;
                     case R.id.signInFragment: navView.setVisibility(View.GONE);
+                    case R.id.signUpFragment: navView.setVisibility(View.GONE);
                 }
             }
         });
