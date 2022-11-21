@@ -18,8 +18,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.androidproject.Entities.Wallet.User;
 import com.example.androidproject.R;
 import com.example.androidproject.ViewModel.Login_RegisterVM.LoginRegisterVM;
+import com.example.androidproject.ViewModel.WalletVM.WalletViewModel;
 import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterFragment extends Fragment {
@@ -27,14 +29,14 @@ public class RegisterFragment extends Fragment {
     private EditText emailEdit, passEdit;
     private TextView signInText;
     private Button signUpBtn;
-    private LoginRegisterVM viewModel;
+    private WalletViewModel viewModel;
     private NavController navController;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        viewModel = new ViewModelProvider(this).get(LoginRegisterVM.class);
-        viewModel.getUserData().observe(this, new Observer<FirebaseUser>() {
+        viewModel = new ViewModelProvider(this).get(WalletViewModel.class);
+        viewModel.getCurrentUser().observe(this, new Observer<FirebaseUser>() {
             @Override
             public void onChanged(FirebaseUser firebaseUser) {
                 if (firebaseUser != null){
@@ -73,10 +75,13 @@ public class RegisterFragment extends Fragment {
             public void onClick(View view) {
                 String email = emailEdit.getText().toString();
                 String pass = passEdit.getText().toString();
-                Log.d("eee", "onClick: " + email + pass);
+              //   Log.d("eee", "onClick: " + email + pass);
+
+                User local = new User();
+                local.setEmail(email);
 
                 if (!email.isEmpty() && !pass.isEmpty()){
-                    viewModel.register(email, pass);
+                    viewModel.registerAccount(null,local, pass);
                 }
 
             }

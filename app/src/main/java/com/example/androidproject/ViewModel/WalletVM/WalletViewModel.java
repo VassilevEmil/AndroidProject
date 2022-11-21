@@ -69,9 +69,8 @@ public class WalletViewModel extends AndroidViewModel  {
     public void loginAccount(Activity activity,String email, String password){
         userRepository.loginAccount(activity, email, password);
     }
-
-    public void signOut()
-    {
-        repository.signOut();
+    public void signOut(){
+        userRepository.signOut();
     }
+
 }

@@ -36,8 +36,8 @@ public class LoginRegisterVM extends AndroidViewModel {
     public void signIn(String email , String pass){
         repository.login(email, pass);
     }
-    public void signOut(){
-        repository.signOut();
+    public void signOut(String email, String pass){
+        repository.signOut(email, pass);
     }
 
 }
