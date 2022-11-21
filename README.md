@@ -20,6 +20,7 @@ list and enter the amount. Last but not least, each cryptocurrency's price can b
 - [x] As a user I want to be able to remove assets from my portfolio. -> Adrian-Cristian Militaru
 - [x] As a user I am interested only on top 30 cryptos in the market. -> Martynas Vyčas 
 - [x] As a user I want to be able to read each of the latest news -> Emil
+- [x] As a user I want to be able to logout from my app -> Emil
 
 # User stories (extra):
 
