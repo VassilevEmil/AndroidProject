@@ -42,6 +42,7 @@ public class SettingsFragment extends Fragment {
 
     private TextView firstNameEditText;
     private TextView lastNameEditText;
+    private TextView accountID;
 
     private String userID;
 
@@ -57,6 +58,7 @@ public class SettingsFragment extends Fragment {
         deleteUserButton = root.findViewById(R.id.navigation_settings_user_delete);
         firstNameEditText = root.findViewById(R.id.navigation_settings_user_firstName);
         lastNameEditText = root.findViewById(R.id.navigation_settings_user_lastName);
+        accountID = root.findViewById(R.id.navigation_settings_user_id);
 
 
         System.out.println(userID.toString());
@@ -81,6 +83,7 @@ public class SettingsFragment extends Fragment {
                         @Override
                         public void onChanged(User user) {
                             if(user!=null){
+                                accountID.setText("Account details: "+user.getUid());
                                 firstNameEditText.setText(user.getFirstName());
                                 lastNameEditText.setText(user.getLastName());
                             }

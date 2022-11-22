@@ -12,6 +12,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/navigation_settings_user_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Account details:"
