@@ -81,7 +81,7 @@ public class RegisterFragment extends Fragment {
                 local.setEmail(email);
 
                 if (!email.isEmpty() && !pass.isEmpty()){
-                    viewModel.registerAccount(null,local, pass);
+                    viewModel.registerAccount((Activity) view.getContext(),local, pass);
                 }
 
             }

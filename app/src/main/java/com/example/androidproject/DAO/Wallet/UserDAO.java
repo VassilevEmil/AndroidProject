@@ -84,8 +84,8 @@ public class UserDAO implements IUserDAO{
     }
 
     @Override
-    public void removeUser(User user) {
-        firebaseDatabase.collection(collectionPath).document(user.getUid())
+    public void removeUser(String uid) {
+        firebaseDatabase.collection(collectionPath).document(uid)
                 .delete()
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -99,6 +99,8 @@ public class UserDAO implements IUserDAO{
                         Log.w(TAG, "Error deleting document", e);
                     }
                 });
+        firebaseAuth.getCurrentUser().delete();
+        firebaseAuth.signOut();
     }
 
     @Override
