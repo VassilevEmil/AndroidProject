@@ -43,9 +43,9 @@ public class UserRepository {
         return userDAO.getUserModal();
     }
 
-    public void removeUser(User user)
+    public void removeUser(String uid)
     {
-        userDAO.removeUser(user);
+        userDAO.removeUser(uid);
     }
 
     public void updateUser(User user)

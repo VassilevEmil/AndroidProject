@@ -56,9 +56,9 @@ public class WalletViewModel extends AndroidViewModel  {
         return userRepository.getUser();
     }
 
-    public void removeUser(User user)
+    public void removeUser(String uid)
     {
-        userRepository.removeUser(user);
+        userRepository.removeUser(uid);
     }
 
     public void updateUser(User user)
@@ -72,5 +72,7 @@ public class WalletViewModel extends AndroidViewModel  {
     public void signOut(){
         userRepository.signOut();
     }
+
+
 
 }

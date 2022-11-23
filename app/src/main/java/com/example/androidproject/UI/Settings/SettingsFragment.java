@@ -33,30 +33,35 @@ public class SettingsFragment extends Fragment {
 
     private FragmentSettingsBinding binding;
     private WalletViewModel walletViewModel;
-    private LoginRegisterVM vm;
-    private EditText emailEdit, passEdit;
 
     private Switch darkModeSwitch;
     private TextView darkModeText;
-    private TextView userDetails;
     private Button signOutButton;
-    private NavController navController;
-     FirebaseAuth auth;
+    private Button updateUserButton;
+    private Button deleteUserButton;
 
+    private TextView firstNameEditText;
+    private TextView lastNameEditText;
+    private TextView accountID;
+
+    private String userID;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentSettingsBinding.inflate(inflater, container, false);
         walletViewModel = new ViewModelProvider(this).get(WalletViewModel.class);
         View root = binding.getRoot();
-
+        userID = new String();
         darkModeSwitch = root.findViewById(R.id.navigation_settings_darkMode_switch);
         darkModeText = root.findViewById(R.id.navigation_settings_darkMode);
-        userDetails = root.findViewById(R.id.navigation_settings_user_details);
         signOutButton = root.findViewById(R.id.navigation_settings_sign_out);
+        updateUserButton = root.findViewById(R.id.navigation_settings_user_update);
+        deleteUserButton = root.findViewById(R.id.navigation_settings_user_delete);
+        firstNameEditText = root.findViewById(R.id.navigation_settings_user_firstName);
+        lastNameEditText = root.findViewById(R.id.navigation_settings_user_lastName);
+        accountID = root.findViewById(R.id.navigation_settings_user_id);
 
 
-
-
+        System.out.println(userID.toString());
 
         darkModeSwitch.setOnCheckedChangeListener((compoundButton, isSwitch) -> {
             if(isSwitch){
@@ -73,10 +78,17 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onChanged(FirebaseUser firebaseUser) {
                 if(firebaseUser != null){
-                    userDetails.setText(walletViewModel.getUser(firebaseUser.getUid()).getValue().toString());
-                }else{
-                    //test until the login will be done
-                    //walletViewModel.loginAccount((Activity) root.getContext(),"goformusicro@gmail.com","test1234567");
+                    userID = firebaseUser.getUid();
+                    walletViewModel.getUser(userID).observeForever(new Observer<User>() {
+                        @Override
+                        public void onChanged(User user) {
+                            if(user!=null){
+                                accountID.setText("Account details: "+user.getUid());
+                                firstNameEditText.setText(user.getFirstName());
+                                lastNameEditText.setText(user.getLastName());
+                            }
+                        }
+                    });
                 }
             }
         });
@@ -84,11 +96,26 @@ public class SettingsFragment extends Fragment {
         signOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-
                 walletViewModel.signOut();
                 Navigation.findNavController(view).navigate(R.id.action_signOutFragment_to_signInFragment);
+            }
+        });
+
+        deleteUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                walletViewModel.removeUser(userID);
+                Navigation.findNavController(view).navigate(R.id.action_signOutFragment_to_signInFragment);
+            }
+        });
+
+        updateUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                User local = walletViewModel.getUser(userID).getValue();
+                local.setFirstName(firstNameEditText.getText().toString());
+                local.setLastName(lastNameEditText.getText().toString());
+                walletViewModel.updateUser(local);
             }
         });
 

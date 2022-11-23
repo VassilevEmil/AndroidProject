@@ -10,7 +10,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public interface IUserDAO {
     void addUser(Activity activity, User user, String password);
-    void removeUser(User user);
+    void removeUser(String uid);
     void updateUser(User newUser);
     MutableLiveData<User> getUser(String uid);
     LiveData<FirebaseUser> getCurrentUser();
