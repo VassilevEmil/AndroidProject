@@ -20,7 +20,7 @@
 
             <TextView
                 android:id="@+id/rank"
-                android:layout_width="30dp"
+                android:layout_width="21dp"
                 android:layout_height="21dp"
                 android:gravity="start"
                 android:text="TextView"
@@ -34,17 +34,17 @@
 
             <TextView
                 android:id="@+id/coin"
-                android:layout_width="75dp"
+                android:layout_width="60dp"
                 android:layout_height="21dp"
-                android:gravity="start"
+                android:gravity="center"
                 android:text="TextView"
-                android:textAlignment="textStart"
+                android:textAlignment="center"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.140"
+                app:layout_constraintHorizontal_bias="0.088"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.50" />
+                app:layout_constraintVertical_bias="0.693" />
 
             <TextView
                 android:id="@+id/price"
@@ -87,6 +87,24 @@
                 app:layout_constraintVertical_bias="0.50"
                 android:textAlignment="textEnd"
                 android:gravity="end" />
+
+            <ImageView
+                android:id="@+id/cryptoSymbolImage"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.13"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.28"
+                app:srcCompat="@drawable/crypto_symbol_background" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                tools:ignore="MissingConstraints" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
