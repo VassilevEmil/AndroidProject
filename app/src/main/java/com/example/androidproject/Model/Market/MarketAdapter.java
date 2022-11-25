@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.content.Context;
 
@@ -12,6 +13,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.androidproject.Entities.Market.Market;
 import com.example.androidproject.R;
 
@@ -41,7 +43,7 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder
     public void onBindViewHolder(@NonNull MarketAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         double percentage = (markets.get(position).getPriceChangePercentage24h());
-
+        Glide.with(holder.itemView.getContext()).load(markets.get(position).getImage()).error(R.drawable.crypto_symbol_background).into(holder.tokenImage);
         holder.rank.setText(Integer.toString(markets.get(position).getMarketCapRank()));
         holder.symbol.setText(markets.get(position).getSymbol());
         holder.currentPrice.setText(String.format("%.3f", markets.get(position).getCurrentPrice()));
@@ -64,7 +66,7 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
 
             TextView rank;
-            // tokenImage_url; NEED TO SEE HOW TO ADD IMAGES
+            ImageView tokenImage;
             TextView symbol;
             TextView currentPrice;
             TextView price_change_percentage_24h;
@@ -72,6 +74,7 @@ public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            tokenImage = itemView.findViewById(R.id.cryptoSymbolImage);
             rank = itemView.findViewById(R.id.rank);
             symbol = itemView.findViewById(R.id.coin);
             currentPrice = itemView.findViewById(R.id.price);
