@@ -1,8 +1,6 @@
 package com.example.androidproject.Model.Market;
 
 import com.example.androidproject.Model.utils.Credentials;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
