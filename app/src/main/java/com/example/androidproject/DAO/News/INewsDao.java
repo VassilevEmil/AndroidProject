@@ -2,7 +2,7 @@ package com.example.androidproject.DAO.News;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.androidproject.Entities.NewsModel;
+import com.example.androidproject.Entities.News.NewsModel;
 
 import java.util.List;
 

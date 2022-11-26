@@ -1,7 +1,6 @@
 package com.example.androidproject.Model.NewsModel;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.WebView;
@@ -9,7 +8,7 @@ import android.webkit.WebViewClient;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.androidproject.Entities.NewsModel;
+import com.example.androidproject.Entities.News.NewsModel;
 import com.example.androidproject.R;
 
 import java.util.List;
