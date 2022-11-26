@@ -90,8 +90,34 @@
                 android:textStyle="bold"
                 android:textSize="12sp">
 
+            </TextView> <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_like"
+                android:id="@+id/like_btn">
+
+            </ImageButton>
+
+            <TextView
+                android:id="@+id/likes_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="likes"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:paddingLeft="5dp">
+
+
             </TextView>
-            "
+
+
+        </LinearLayout>
+
 
 
         </LinearLayout>

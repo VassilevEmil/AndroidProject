@@ -8,6 +8,7 @@ import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -82,6 +83,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         TextView mheading, mcontent, mcreator, mtime, mauthor;
         CardView cardView;
         ImageView imageView;
+        private ImageButton imageButton;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -91,6 +93,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             mcreator = itemView.findViewById(R.id.author);
             mtime = itemView.findViewById(R.id.time);
             imageView = itemView.findViewById(R.id.imageview);
+            imageButton = itemView.findViewById(R.id.like_btn);
           //  mauthor = itemView.findViewById(R.id.author);
         }
 
@@ -109,8 +112,23 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         });
         }
 
+        public void setImageButton(ViewHolder viewHolder){
+            viewHolder.imageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+
+                }
+            });
+        }
+
+        public void setLikesDisplay(){
 
         }
 
 
-}
+    }
+
+
+        }
+
