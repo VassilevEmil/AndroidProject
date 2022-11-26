@@ -17,9 +17,8 @@ import com.bumptech.glide.Glide;
 import com.example.androidproject.Entities.Market.Market;
 import com.example.androidproject.R;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.function.DoubleToIntFunction;
+
 
 public class MarketAdapter extends RecyclerView.Adapter<MarketAdapter.ViewHolder> {
 

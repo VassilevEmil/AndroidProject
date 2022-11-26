@@ -17,13 +17,13 @@ public class MarketViewModel extends ViewModel {
         repository = MarketRepository.getInstance();
     }
 
-    public void getMarket(){
-        repository.loadMarket("usd", "market_cap_desc", 30, "24h");
+    public void getMarket(String currency, String order, int per_page, String percentageChangeTime){
+        repository.loadMarket(currency, order, per_page, percentageChangeTime);
     }
 
 
     public LiveData<List<Market>> getMarketData(){
-        return repository.getMarketData(); // CALL DAO
+        return repository.getMarketData();
     }
 
 }

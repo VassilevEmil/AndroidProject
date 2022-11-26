@@ -17,4 +17,15 @@
     <string name="have_an_account">Have an account? Sign In</string>
     <string name="sign_out">Sign out</string>
     <string name="change_to_dark_mode">Change to Dark Mode</string>
+    <string name="price_usd">price (USD)</string>
+    <string name="change_it">CHANGE IT</string>
+    <string name="target_currency">Target currency:</string>
+
+    <string-array name="currency_string_array">
+        <item>USD</item>
+        <item>EUR</item>
+        <item>GBP</item>
+        <item>JPY</item>
+    </string-array>
+
 </resources>
