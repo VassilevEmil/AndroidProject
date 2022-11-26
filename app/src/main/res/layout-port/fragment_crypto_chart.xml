@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".UI.LineChartFragment"
+    android:orientation="vertical"
+    tools:ignore="MissingDefaultResource">
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/cryptoGraph"
+        android:layout_width="match_parent"
+        android:layout_height="502dp" />
+
+
+</LinearLayout>

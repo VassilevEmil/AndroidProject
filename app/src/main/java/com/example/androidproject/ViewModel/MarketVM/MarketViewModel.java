@@ -17,13 +17,17 @@ public class MarketViewModel extends ViewModel {
         repository = MarketRepository.getInstance();
     }
 
-    public void getMarket(String currency, String order, int per_page, String percentageChangeTime){
-        repository.loadMarket(currency, order, per_page, percentageChangeTime);
+    public void getMarket(String currency, String order, int per_page, String percentageChangeTime, boolean sparkline){
+        repository.loadMarket(currency, order, per_page, percentageChangeTime, sparkline);
     }
 
 
     public LiveData<List<Market>> getMarketData(){
         return repository.getMarketData();
+    }
+
+    public LiveData<List<Double>> getSparklineData(){
+        return repository.getSparklineData();
     }
 
 }

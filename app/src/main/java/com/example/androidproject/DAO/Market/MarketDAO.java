@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.androidproject.Entities.Market.Market;
+import com.example.androidproject.Entities.Market.SparklineIn7d;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -15,7 +16,8 @@ import java.util.List;
 
 public class MarketDAO implements IMarketDAO{
 
-    MutableLiveData<List<Market>> marketModel = new MutableLiveData<>();
+    MutableLiveData<List<Market>> marketModel;
+    MutableLiveData<List<Double>> sparklineModel;
     private static MarketDAO instance;
     private static final String collectionPath = "Markets";
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -25,6 +27,7 @@ public class MarketDAO implements IMarketDAO{
 
     private MarketDAO() {
         marketModel = new MutableLiveData<>();
+        sparklineModel = new MutableLiveData<>();
     }
 
     public static MarketDAO getInstance() {
@@ -39,6 +42,7 @@ public class MarketDAO implements IMarketDAO{
     public void addMarkets(List<Market> marketModel) {
 
         for(Market item:marketModel){
+           // myRef.child("Crypto").removeValue();
             myRef.child("Crypto").child(item.getMarketCapRank().toString()).setValue(item);
         }
     }
@@ -55,6 +59,8 @@ public class MarketDAO implements IMarketDAO{
                  local.add(market);
              }
              marketModel.postValue(local);
+
+
          }
 
          @Override
@@ -64,5 +70,27 @@ public class MarketDAO implements IMarketDAO{
      });
     return marketModel;
   }
+
+    @Override
+    public MutableLiveData<List<Double>> getSparkline() {
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<Double> local_ = new ArrayList<>();
+
+                for (DataSnapshot dataSnapshot : snapshot.child("Crypto").child("1").child("sparklineIn7d").child("price").getChildren()){
+                    local_.add(dataSnapshot.getValue(Double.class));
+                }
+                sparklineModel.postValue(local_);
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return sparklineModel;
+    }
 
 }
