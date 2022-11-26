@@ -28,7 +28,12 @@ public class Market implements Serializable
     @SerializedName("price_change_percentage_24h")
     @Expose
     private Double priceChangePercentage24h;
-    private final static long serialVersionUID = 747698509230512162L;
+    @Expose
+    private Double atlChangePercentage;
+    @SerializedName("sparkline_in_7d")
+    @Expose
+    private SparklineIn7d sparklineIn7d;
+    private final static long serialVersionUID = -3517412048031051768L;
 
     /**
      * No args constructor for use in serialization
@@ -46,8 +51,9 @@ public class Market implements Serializable
      * @param marketCapRank
      * @param name
      * @param currentPrice
+     * @param sparklineIn7d
      */
-    public Market(String symbol, String name, String image, Double currentPrice, Long marketCap, Integer marketCapRank, Double priceChangePercentage24h) {
+    public Market(String symbol, String name, String image, Double currentPrice, Long marketCap, Integer marketCapRank, Double priceChangePercentage24h, SparklineIn7d sparklineIn7d) {
         super();
         this.symbol = symbol;
         this.name = name;
@@ -56,6 +62,7 @@ public class Market implements Serializable
         this.marketCap = marketCap;
         this.marketCapRank = marketCapRank;
         this.priceChangePercentage24h = priceChangePercentage24h;
+        this.sparklineIn7d = sparklineIn7d;
     }
 
     public String getSymbol() {
@@ -112,6 +119,22 @@ public class Market implements Serializable
 
     public void setPriceChangePercentage24h(Double priceChangePercentage24h) {
         this.priceChangePercentage24h = priceChangePercentage24h;
+    }
+
+    public Double getAtlChangePercentage() {
+        return atlChangePercentage;
+    }
+
+    public void setAtlChangePercentage(Double atlChangePercentage) {
+        this.atlChangePercentage = atlChangePercentage;
+    }
+
+    public SparklineIn7d getSparklineIn7d() {
+        return sparklineIn7d;
+    }
+
+    public void setSparklineIn7d(SparklineIn7d sparklineIn7d) {
+        this.sparklineIn7d = sparklineIn7d;
     }
 
 }

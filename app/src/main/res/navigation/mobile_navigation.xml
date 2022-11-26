@@ -33,7 +33,11 @@
         android:id="@+id/navigation_market"
         android:name="com.example.androidproject.UI.Market.MarketFragment"
         android:label="Market"
-        tools:layout="@layout/fragment_market" />
+        tools:layout="@layout/fragment_market">
+    <action
+        android:id="@+id/action_crypto_charts"
+        app:destination="@id/cryptoCharts" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_news"
@@ -46,6 +50,12 @@
         android:name="com.example.androidproject.UI.Wallet.WalletFragment"
         android:label="Wallet"
         tools:layout="@layout/fragment_wallet" />
+
+    <fragment
+        android:id="@+id/cryptoCharts"
+        android:name="com.example.androidproject.UI.LineChartFragment"
+        android:label="Chart"
+        tools:layout="@layout/fragment_crypto_chart" />
 
     <fragment
         android:id="@+id/navigation_settings"

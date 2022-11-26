@@ -26,11 +26,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -40,7 +40,8 @@ public class MainActivity extends AppCompatActivity {
                 R.id.navigation_news,
                 R.id.navigation_settings,
                 R.id.signInFragment,
-                R.id.signUpFragment)
+                R.id.signUpFragment,
+                R.id.cryptoCharts)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);

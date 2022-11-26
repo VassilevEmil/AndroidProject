@@ -17,6 +17,7 @@ public interface MarketApi {
             @Query("vs_currency") String currency,
             @Query("order") String order,
             @Query("per_page") int per_page,
-            @Query("price_change_percentage") String price_change_percentage
+            @Query("price_change_percentage") String price_change_percentage,
+            @Query("sparkline") boolean sparkline
             );
 }
