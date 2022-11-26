@@ -3,24 +3,29 @@ package com.example.androidproject.Model.NewsModel;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.os.Parcelable;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.androidproject.Entities.NewsModel;
+import com.example.androidproject.Entities.News.Likes;
+import com.example.androidproject.Entities.News.NewsModel;
 import com.example.androidproject.R;
+import com.example.androidproject.ViewModel.NewsVM.NewsViewModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
-import java.io.InputStream;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,12 +34,17 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     Context context;
     List<NewsModel> modelList = new ArrayList<>();
     NewsRepository newsRepository;
+    List<Likes> likes = new ArrayList<>();
+    NewsViewModel viewModel;
 
-    public NewsAdapter(Context context, List<NewsModel> modelList) {
+    public NewsAdapter(Context context, List<NewsModel> modelList,NewsViewModel viewModel) {
         this.context = context;
         this.modelList = modelList;
-
+        this.viewModel=viewModel;
     }
+//
+//    public NewsAdapter(Context context, List<Likes> likes) {
+//    }
 
 
     @Override
@@ -45,30 +55,24 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
 
     @Override
-    public void onBindViewHolder(NewsAdapter.ViewHolder viewHolder, @SuppressLint("RecyclerView") int i) {
-
+    public void onBindViewHolder(ViewHolder viewHolder, @SuppressLint("RecyclerView") int i) {
 
         viewHolder.mtime.setText("Published at:-" + modelList.get(i).getPubDate());
         viewHolder.mheading.setText(modelList.get(i).getTitle());
-
-
 
 //        if(modelList.get(i).getCreator()!=null){
 //            viewHolder.mcreator.setText(modelList.get(i).getCreator().get(0));
 //            }
 
-//        else if (modelList.get(i).getCreator().isEmpty()){
-//            viewHolder.mcreator.setText(modelList.get(i).getAuthor());
-//        };
-
-
         viewHolder.mcontent.setText(modelList.get(i).getContent());
-
-      Glide.with(viewHolder.itemView.getContext()).load(modelList.get(i).getImage_url()).error(R.drawable.ic_launcher_background).into(viewHolder.imageView);
-
-      //  System.out.println("hereeeeee" + modelList.get(i).getLink());
-
+        Glide.with(viewHolder.itemView.getContext()).load(modelList.get(i).getImage_url()).error(R.drawable.ic_launcher_background).into(viewHolder.imageView);
         viewHolder.displayNews(viewHolder, i);
+        viewHolder.addLike(viewHolder,i);
+
+        System.out.println(modelList.get(i).getPubDate().toString());
+
+        viewHolder.displayLikes(viewHolder,i);
+
 
     }
 
@@ -82,6 +86,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         TextView mheading, mcontent, mcreator, mtime, mauthor;
         CardView cardView;
         ImageView imageView;
+        private ImageButton imageButton;
+        TextView likesCount;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -91,6 +97,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             mcreator = itemView.findViewById(R.id.author);
             mtime = itemView.findViewById(R.id.time);
             imageView = itemView.findViewById(R.id.imageview);
+            imageButton = itemView.findViewById(R.id.like_btn);
+            likesCount = itemView.findViewById(R.id.likes_textview);
           //  mauthor = itemView.findViewById(R.id.author);
         }
 
@@ -109,8 +117,39 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         });
         }
 
+        public void displayLikes(ViewHolder viewHolder, int i){
+            viewModel.getLikes(modelList.get(i).getPubDate()).observeForever(new Observer<List<Likes>>() {
+                @Override
+                public void onChanged(List<Likes> likes) {
+                    viewHolder.likesCount.setText(String.valueOf(likes.size()));
 
+                }
+            });
         }
 
 
-}
+        public void addLike(ViewHolder viewHolder, int i) {
+            viewHolder.imageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Likes local = new Likes();
+                    local.setNewsRef(modelList.get(i).getPubDate());
+                    viewModel.addLike(local);
+                }
+            });
+        }
+    }
+
+    private void isLikes(String pubDate, ImageView imageView){
+
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
+                .child("Likes")
+                .child(pubDate);
+
+    }
+
+
+        }
+

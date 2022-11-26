@@ -6,29 +6,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.androidproject.Entities.NewsModel;
+import com.example.androidproject.Entities.News.NewsModel;
 import com.example.androidproject.Model.NewsModel.NewsAdapter;
-import com.example.androidproject.Model.NewsModel.NewsServiceGenerator;
-import com.example.androidproject.Model.utils.Credentials;
 import com.example.androidproject.R;
-import com.example.androidproject.UI.Responses.NewsResponse;
 import com.example.androidproject.ViewModel.NewsVM.NewsViewModel;
+import com.example.androidproject.ViewModel.WalletVM.WalletViewModel;
 import com.example.androidproject.databinding.FragmentNewsBinding;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class NewsFragment extends Fragment {
 
@@ -38,6 +31,9 @@ public class NewsFragment extends Fragment {
     TextView textView;
     List<NewsModel> newsModel = new ArrayList<>();
     NewsAdapter adapter;
+    TextView userID;
+
+    private WalletViewModel walletViewModel;
 
 
 
@@ -49,16 +45,36 @@ public class NewsFragment extends Fragment {
         recyclerView = root.findViewById(R.id.recycleviewofNews);
         recyclerView.hasFixedSize();
 
-         viewModel.getNews();
+        // get userId
+
+//        walletViewModel.getCurrentUser().observeForever(new Observer<FirebaseUser>() {
+//            @Override
+//            public void onChanged(FirebaseUser firebaseUser) {
+//                if(firebaseUser != null){
+//                    userID.setText(firebaseUser.getUid());
+//                }else{
+//                    //test until the login will be done
+//
+//                    //viewModel.loginAccount((Activity) root.getContext(),"goformusicro@gmail.com","test1234567");
+//                }
+//
+//               // setLikesList();
+//            }
+//        });
+
+
+        viewModel.getNews();
         viewModel.getSearchedNews().observeForever(newsList->{
-            adapter = new NewsAdapter(binding.getRoot().getContext(),newsList);
+           adapter = new NewsAdapter(binding.getRoot().getContext(),newsList,viewModel);
             recyclerView.setAdapter(adapter);
         });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
 
         return root;
-
     }
+
+
+
 
 }
