@@ -31,9 +31,9 @@ public class MarketRepository {
         return marketDAO.getMarkets();
     }
 
-    public MutableLiveData<List<Double>> getSparklineData()
+    public MutableLiveData<List<Double>> getSparklineData(String cryptoSymbol)
     {
-        return marketDAO.getSparkline();
+        return marketDAO.getSparkline(cryptoSymbol);
     }
     
     public static synchronized MarketRepository getInstance(){
