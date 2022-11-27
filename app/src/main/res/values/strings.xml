@@ -21,6 +21,9 @@
     <string name="change_it">CHANGE IT</string>
     <string name="target_currency">Target currency:</string>
     <string name="button">Button</string>
+    <string name="charts">CHARTS</string>
+    <string name="search">search</string>
+    <string name="enter_ticker_btc">enter ticker (btc..)</string>
 
     <string-array name="currency_string_array">
         <item>USD</item>

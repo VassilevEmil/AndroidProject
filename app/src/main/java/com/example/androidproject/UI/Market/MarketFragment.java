@@ -49,7 +49,7 @@ public class MarketFragment extends Fragment {
         recyclerView.hasFixedSize();
         priceText = root.findViewById(R.id.priceText);
 
-        buttonToFun = root.findViewById(R.id.buttonToFun); //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        buttonToFun = root.findViewById(R.id.buttonToFun);
 
         Spinner spinner = root.findViewById(R.id.currency_spinner);
 
@@ -64,17 +64,6 @@ public class MarketFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parentView) {
                 //Then nothing, lol
             }
-        });
-
-        viewModel.getSparklineData().observeForever(new Observer<List<Double>>() {
-            @Override
-            public void onChanged(List<Double> doubles) {
-                for (int i = 0; i < doubles.size(); i++) {
-                    System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" +
-                            doubles.get(i));
-                }
-            }
-
         });
 
 

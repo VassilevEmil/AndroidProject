@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.androidproject.Entities.Market.Market;
-import com.example.androidproject.Entities.Market.SparklineIn7d;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,7 +18,7 @@ public class MarketDAO implements IMarketDAO{
     MutableLiveData<List<Market>> marketModel;
     MutableLiveData<List<Double>> sparklineModel;
     private static MarketDAO instance;
-    private static final String collectionPath = "Markets";
+    private static final String collectionPath = "Crypto";
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
 
@@ -42,8 +41,7 @@ public class MarketDAO implements IMarketDAO{
     public void addMarkets(List<Market> marketModel) {
 
         for(Market item:marketModel){
-           // myRef.child("Crypto").removeValue();
-            myRef.child("Crypto").child(item.getMarketCapRank().toString()).setValue(item);
+            myRef.child(collectionPath).child(item.getMarketCapRank().toString()).setValue(item);
         }
     }
 
@@ -54,7 +52,7 @@ public class MarketDAO implements IMarketDAO{
          @Override
          public void onDataChange(@NonNull DataSnapshot snapshot) {
              ArrayList<Market> local = new ArrayList<>();
-             for (DataSnapshot dataSnapshot : snapshot.child("Crypto").getChildren()){
+             for (DataSnapshot dataSnapshot : snapshot.child(collectionPath).getChildren()){
                  Market market = dataSnapshot.getValue(Market.class);
                  local.add(market);
              }
@@ -72,17 +70,24 @@ public class MarketDAO implements IMarketDAO{
   }
 
     @Override
-    public MutableLiveData<List<Double>> getSparkline() {
+    public MutableLiveData<List<Double>> getSparkline(String cryptoSymbol) {
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ArrayList<Double> local_ = new ArrayList<>();
 
-                for (DataSnapshot dataSnapshot : snapshot.child("Crypto").child("1").child("sparklineIn7d").child("price").getChildren()){
-                    local_.add(dataSnapshot.getValue(Double.class));
+                // getChildrenCount - returns exact number of resources in the "crypto" dbs
+
+                for (int i = 0; i < snapshot.child(collectionPath).getChildrenCount(); i++) {
+                    String compare = (String) snapshot.child(collectionPath).child(String.valueOf(i)).child("symbol").getValue();
+                    if (cryptoSymbol.equalsIgnoreCase(compare)) {
+                        for (DataSnapshot dataSnapshot : snapshot.child(collectionPath).child(String.valueOf(i)).child("sparklineIn7d").child("price").getChildren()) {
+                            local_.add(dataSnapshot.getValue(Double.class));
+                        }
+                        sparklineModel.postValue(local_);
+                    }
                 }
-                sparklineModel.postValue(local_);
 
             }
             @Override

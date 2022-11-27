@@ -26,8 +26,8 @@ public class MarketViewModel extends ViewModel {
         return repository.getMarketData();
     }
 
-    public LiveData<List<Double>> getSparklineData(){
-        return repository.getSparklineData();
+    public LiveData<List<Double>> getSparklineData(String cryptoSymbol){
+        return repository.getSparklineData(cryptoSymbol);
     }
 
 }

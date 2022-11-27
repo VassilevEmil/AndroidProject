@@ -10,5 +10,5 @@ import java.util.List;
 public interface IMarketDAO {
     void addMarkets(List<Market> newsModel);
     MutableLiveData<List<Market>> getMarkets();
-    MutableLiveData<List<Double>> getSparkline();
+    MutableLiveData<List<Double>> getSparkline(String cryptoSymbol);
 }
