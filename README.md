@@ -11,10 +11,10 @@ list and enter the amount. Last but not least, each cryptocurrency's price can b
 
 # User stories:
 
-- [x] As a user I want to be able to check the latest crypto prices. -> Martynas Vyčas
-- [x] As a user I want to be able to see the latest crypto news. -> Emil Vasilev
-- [x] As a user I want to be able to see my portfolio. -> Adrian-Cristian Militaru
-- [x] As a user I want to be able to add assets to my portfolio. -> Adrian-Cristian Militaru
+- [x] As a user I want to be able to check the latest crypto market data, so that I would have insight on price, percentage change and market cap for each cryptocurrency.  -> Martynas Vyčas
+- [x] As a user I want to be able to see the latest crypto news, so I would get the insight of what is happening in the markets -> Emil Vasilev
+- [x] As a user I want to be able to see my portfolio, so I could track how much of each cryptocurrency I have -> Adrian-Cristian Militaru
+- [x] As a user I want to be able to add assets to my portfolio,  -> Adrian-Cristian Militaru
 - [x] As a user I want to be able to register myself. -> Adrian-Cristian Militaru / Martynas Vyčas / Emil Vasilev
 - [x] As a user I want to be able to login. -> Adrian-Cristian Militaru / Martynas Vyčas / Emil Vasilev
 - [x] As a user I want to be able to remove assets from my portfolio. -> Adrian-Cristian Militaru
@@ -23,6 +23,8 @@ list and enter the amount. Last but not least, each cryptocurrency's price can b
 - [x] As a user I want to be able to logout from my app -> Emil
 - [x] As a user I want to be able to see historical crypto price graphs -> Martynas Vyčas 
 - [x] As a user I want to be able to search for a specific crypto price graphs -> Martynas Vyčas 
+- [x] As a user I want to be able to change the target price for live market data, so I could see the price in different currency (USD/EUR/GBP/JPY) -> Martynas Vyčas 
+- [x] As a user I want to be able to like the news, so  -> Emil 
 
 # User stories (extra):
 
@@ -35,4 +37,8 @@ list and enter the amount. Last but not least, each cryptocurrency's price can b
 - [x] As a user I want to have an easy way to navigate through the app.
 - [x] As a user I want to be able to change the theme on my app.  -> Adrian-Crisitan Militaru
 - [ ] As a user I want to have to have a splash screen -> Emil Vasilev
+
+## References
+
+[^1]: 
 
