@@ -80,9 +80,13 @@ public class MarketDAO implements IMarketDAO{
                 // getChildrenCount - returns exact number of resources in the "crypto" dbs
 
                 for (int i = 0; i < snapshot.child(collectionPath).getChildrenCount(); i++) {
-                    String compare = (String) snapshot.child(collectionPath).child(String.valueOf(i)).child("symbol").getValue();
+                    String compare = (String) snapshot.child(collectionPath)
+                            .child(String.valueOf(i)).child("symbol").getValue();
+
                     if (cryptoSymbol.equalsIgnoreCase(compare)) {
-                        for (DataSnapshot dataSnapshot : snapshot.child(collectionPath).child(String.valueOf(i)).child("sparklineIn7d").child("price").getChildren()) {
+                        for (DataSnapshot dataSnapshot : snapshot.child(collectionPath)
+                                .child(String.valueOf(i)).child("sparklineIn7d").child("price")
+                                .getChildren()) {
                             local_.add(dataSnapshot.getValue(Double.class));
                         }
                         sparklineModel.postValue(local_);
