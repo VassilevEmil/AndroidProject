@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 
@@ -45,6 +46,8 @@ public class LineChartFragment extends Fragment {
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>();
         Button searchButt;
         EditText text;
+        Button backButton;
+        private NavController navController;
 
         @Override
         public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -77,6 +80,17 @@ public class LineChartFragment extends Fragment {
                                         }
 
                                 });
+                        }
+                });
+
+                backButton = view.findViewById(R.id.backButton);
+
+                navController = Navigation.findNavController(view);
+
+                backButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                                navController.navigate(R.id.navigation_market);
                         }
                 });
         }

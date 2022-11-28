@@ -25,6 +25,7 @@
     <string name="search">search</string>
     <string name="enter_ticker_btc">enter ticker (btc..)</string>
     <string name="time_period">Time period</string>
+    <string name="back">Back</string>
 
     <string-array name="currency_string_array">
         <item>USD</item>
