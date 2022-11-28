@@ -39,6 +39,12 @@ public class NewsDao implements INewsDao {
     public void  addNews(List<NewsModel> newsModel) {
 
         for(NewsModel item:newsModel){
+            if(item.getCreator()==null) {
+                ArrayList<String> localTest = new ArrayList<>();
+                localTest.add("Anonymous");
+                item.setCreator(localTest);
+            };
+
             myRef.child("News").child(item.getPubDate()).setValue(item);
         }
     }
@@ -56,7 +62,6 @@ public class NewsDao implements INewsDao {
                 for(DataSnapshot dataSnapshot : snapshot.child("News").getChildren()){
                     NewsModel news = dataSnapshot.getValue(NewsModel.class);
                     local.add(news);
-
                 }
                 newsModel.postValue(local);
 
