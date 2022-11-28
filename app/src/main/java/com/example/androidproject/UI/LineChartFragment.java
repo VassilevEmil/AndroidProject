@@ -94,10 +94,6 @@ public class LineChartFragment extends Fragment {
 
                 graphView.addSeries(series);
 
-                graphView.setTitleColor(R.color.purple_200);
-
-                graphView.setTitleTextSize(60);
-
                 return root;
     }
 }
