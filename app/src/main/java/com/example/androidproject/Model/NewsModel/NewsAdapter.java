@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,12 +61,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         viewHolder.mtime.setText("Published at:-" + modelList.get(i).getPubDate());
         viewHolder.mheading.setText(modelList.get(i).getTitle());
 
-//        if(modelList.get(i).getCreator()!=null){
-//            viewHolder.mcreator.setText(modelList.get(i).getCreator().get(0));
-//            }
-
+        viewHolder.mcreator.setText("By "+modelList.get(i).getCreator().get(0));
         viewHolder.mcontent.setText(modelList.get(i).getContent());
-        Glide.with(viewHolder.itemView.getContext()).load(modelList.get(i).getImage_url()).error(R.drawable.ic_launcher_background).into(viewHolder.imageView);
+        Glide.with(viewHolder.itemView.getContext()).load(modelList.get(i).getImage_url()).error(R.drawable.ic_no_image).into(viewHolder.imageView);
         viewHolder.displayNews(viewHolder, i);
         viewHolder.addLike(viewHolder,i);
 
@@ -99,7 +97,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             imageView = itemView.findViewById(R.id.imageview);
             imageButton = itemView.findViewById(R.id.like_btn);
             likesCount = itemView.findViewById(R.id.likes_textview);
-          //  mauthor = itemView.findViewById(R.id.author);
+            mauthor = itemView.findViewById(R.id.author);
         }
 
         // method for opening a new intent when clicking to see a news
