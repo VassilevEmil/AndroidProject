@@ -1,19 +1,18 @@
 package com.example.androidproject.UI.Market;
 
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -21,7 +20,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
+import com.example.androidproject.Entities.Market.Market;
 import com.example.androidproject.Model.Market.MarketAdapter;
 import com.example.androidproject.R;
 import com.example.androidproject.ViewModel.MarketVM.MarketViewModel;
@@ -38,6 +37,8 @@ public class MarketFragment extends Fragment {
     TextView priceText;
     Button buttonToFun;
     private NavController navController;
+    ProgressBar progressBar;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -48,10 +49,13 @@ public class MarketFragment extends Fragment {
         recyclerView = root.findViewById(R.id.recycleView);
         recyclerView.hasFixedSize();
         priceText = root.findViewById(R.id.priceText);
+        progressBar = root.findViewById(R.id.progress_circular);
 
         buttonToFun = root.findViewById(R.id.buttonToFun);
 
         Spinner spinner = root.findViewById(R.id.currency_spinner);
+
+        progressBar.setVisibility(View.VISIBLE);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -66,17 +70,25 @@ public class MarketFragment extends Fragment {
             }
         });
 
+        viewModel.getMarketData().observe(getViewLifecycleOwner(), new Observer<List<Market>>() {
+            @Override
+            public void onChanged(List<Market> markets) {
+                adapter = new MarketAdapter(binding.getRoot().getContext(), markets);
+                recyclerView.setAdapter(adapter);
+                progressBar.setVisibility(View.INVISIBLE);
 
-        viewModel.getMarketData().observeForever(marketList -> {
-            adapter = new MarketAdapter(binding.getRoot().getContext(), marketList);
-            recyclerView.setAdapter(adapter);
+            }
         });
-
         recyclerView.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
 
         return root;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
