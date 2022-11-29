@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                     case R.id.signInFragment: navView.setVisibility(View.GONE);
                     case R.id.signUpFragment: navView.setVisibility(View.GONE);
+                    case R.id.cryptoCharts: navView.setVisibility(View.GONE);
                 }
             }
         });
