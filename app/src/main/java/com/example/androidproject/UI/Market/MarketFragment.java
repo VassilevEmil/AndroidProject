@@ -57,7 +57,7 @@ public class MarketFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 String currency = spinner.getSelectedItem().toString();
-                viewModel.getMarket(currency, "market_cap_desc", 30, "24h", true);
+                viewModel.getMarket(currency, "market_cap_desc", 32, "24h", true);
             }
 
             @Override
