@@ -41,7 +41,7 @@ list and enter the amount. Last but not least, each cryptocurrency's price can b
 ## References
 
 1: https://github.com/BaicoianuIoanSorin/HotelDoorProject - to look over the fragment navigations and DAO integrations
-2: 
+2: https://github.com/CodingSTUFF070/Login-and-SignUP-MVVM - helped to implement login and register functionality.
 3: https://github.com/KasperKnop/PokeDB - used part of the code to hide the navigation bar in specific fragments.
 
 ## Youtube VIDEO
