@@ -40,5 +40,10 @@ list and enter the amount. Last but not least, each cryptocurrency's price can b
 
 ## References
 
-[^1]: 
+1: https://github.com/BaicoianuIoanSorin/HotelDoorProject - to look over the fragment navigations and DAO integrations
+2: 
+3
 
+## Youtube VIDEO
+
+https://www.youtube.com/watch?v=yLi7xWtSFpc
