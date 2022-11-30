@@ -20,8 +20,6 @@ public class MarketViewModel extends ViewModel {
     public void getMarket(String currency, String order, int per_page, String percentageChangeTime, boolean sparkline){
         repository.loadMarket(currency, order, per_page, percentageChangeTime, sparkline);
     }
-
-
     public LiveData<List<Market>> getMarketData(){
         return repository.getMarketData();
     }
