@@ -38,10 +38,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
     List<Likes> likes = new ArrayList<>();
     NewsViewModel viewModel;
 
-    public NewsAdapter(Context context, List<NewsModel> modelList,NewsViewModel viewModel) {
+    public NewsAdapter(Context context, List<NewsModel> modelList, NewsViewModel viewModel) {
         this.context = context;
         this.modelList = modelList;
-        this.viewModel=viewModel;
+        this.viewModel = viewModel;
     }
 //
 //    public NewsAdapter(Context context, List<Likes> likes) {
@@ -61,15 +61,15 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         viewHolder.mtime.setText("Published at:-" + modelList.get(i).getPubDate());
         viewHolder.mheading.setText(modelList.get(i).getTitle());
 
-        viewHolder.mcreator.setText("By "+modelList.get(i).getCreator().get(0));
+        viewHolder.mcreator.setText("By " + modelList.get(i).getCreator().get(0));
         viewHolder.mcontent.setText(modelList.get(i).getContent());
         Glide.with(viewHolder.itemView.getContext()).load(modelList.get(i).getImage_url()).error(R.drawable.ic_no_image).into(viewHolder.imageView);
         viewHolder.displayNews(viewHolder, i);
-        viewHolder.addLike(viewHolder,i);
+        viewHolder.addLike(viewHolder, i);
 
         System.out.println(modelList.get(i).getPubDate().toString());
 
-        viewHolder.displayLikes(viewHolder,i);
+        viewHolder.displayLikes(viewHolder, i);
 
 
     }
@@ -102,20 +102,22 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
         // method for opening a new intent when clicking to see a news
 
-        public void displayNews(ViewHolder viewHolder, int i){
+        public void displayNews(ViewHolder viewHolder, int i) {
 
-                   viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, webView.class);
-                intent.putExtra("link", modelList.get(i).getLink());
-                context.startActivity(intent);
-             //   System.out.println(modelList.get(i).getLink() + "bbbbbbbbbbbbbbbbbbbbb");
-            }
-        });
+            viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, webView.class);
+                    intent.putExtra("link", modelList.get(i).getLink());
+                    context.startActivity(intent);
+
+                }
+            });
         }
 
-        public void displayLikes(ViewHolder viewHolder, int i){
+        // method to show the 'heart like' button for liking the news
+
+        public void displayLikes(ViewHolder viewHolder, int i) {
             viewModel.getLikes(modelList.get(i).getPubDate()).observeForever(new Observer<List<Likes>>() {
                 @Override
                 public void onChanged(List<Likes> likes) {
@@ -125,6 +127,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
             });
         }
 
+        // like a specific article based on the  unique Id (Pubdate)
 
         public void addLike(ViewHolder viewHolder, int i) {
             viewHolder.imageButton.setOnClickListener(new View.OnClickListener() {
@@ -138,16 +141,5 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
         }
     }
 
-    private void isLikes(String pubDate, ImageView imageView){
-
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
-                .child("Likes")
-                .child(pubDate);
-
-    }
-
-
-        }
+}
 

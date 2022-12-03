@@ -11,6 +11,7 @@ public class NewsModel {
     private String title, description, content, pubDate, image_url, link;
     private ArrayList<String> creator, category;
     private String author;
+    int like;
 
     public NewsModel()
     {
@@ -23,13 +24,14 @@ public class NewsModel {
         this.category = new ArrayList<>();
         this.link = "";
         this.author = "";
+        this.like = 0;
     }
 //
 //    public NewsModel(){
 //
 //    }
 
-    public NewsModel(String title,ArrayList<String> creator, String description, String content, String pubDate, String image_url, ArrayList<String> category, String link) {
+    public NewsModel(String title,ArrayList<String> creator, String description, String content, String pubDate, String image_url, ArrayList<String> category, String link, int like) {
         this.title = title;
         this.creator = creator;
         this.description = description;
@@ -38,6 +40,7 @@ public class NewsModel {
         this.image_url = image_url;
         this.category = category;
         this.link = link;
+        like = 0;
     }
 
     public String getTitle() {
@@ -99,7 +102,13 @@ public class NewsModel {
         this.author = author;
     }
 
+    public int getLike() {
+        return like;
+    }
 
+    public void setLike(int like) {
+        this.like = like;
+    }
 
     public void setCreator(java.util.ArrayList<String> creator) {
         this.creator = creator;

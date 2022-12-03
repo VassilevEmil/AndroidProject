@@ -28,10 +28,8 @@ public class webView extends AppCompatActivity {
 
         webView = findViewById(R.id.webview);
 
-
         Intent intent = getIntent();
         String link = intent.getStringExtra("link");
-        System.out.println("eeeeeeeeeeeeeeee" + link);
 
             webView.setWebViewClient(new WebViewClient());
             webView.loadUrl(link);
