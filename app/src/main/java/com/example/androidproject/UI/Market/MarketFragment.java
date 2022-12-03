@@ -1,5 +1,8 @@
 package com.example.androidproject.UI.Market;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +41,7 @@ public class MarketFragment extends Fragment {
     Button buttonToFun;
     private NavController navController;
     ProgressBar progressBar;
+
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,

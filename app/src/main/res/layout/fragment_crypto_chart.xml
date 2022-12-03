@@ -66,7 +66,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         android:gravity="start"
-        android:text="@string/price"
+        android:text="@string/price_usd1"
         android:textColor="@color/black"
         tools:ignore="RtlSymmetry" />
 
@@ -82,7 +82,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/time_period"
+        android:text="@string/time_period_1h"
         android:textColor="@color/black"
         android:paddingStart="30dp"
         tools:ignore="RtlSymmetry" />

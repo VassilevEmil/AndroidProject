@@ -70,7 +70,7 @@ public class LineChartFragment extends Fragment {
                                                                 series.resetData(new DataPoint[]{});
                                                                 // We clear the data in series, before getting the new one
 
-                                                                for (int i = 0; i < doubles.size(); i++) {
+                                                                for (int i = 80; i < doubles.size(); i++) {
 
                                                                         series.appendData(new DataPoint(i, doubles
                                                                                 .get(i)), false, doubles.size());
