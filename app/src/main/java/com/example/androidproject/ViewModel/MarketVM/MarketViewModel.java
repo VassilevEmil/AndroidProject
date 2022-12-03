@@ -1,7 +1,6 @@
 package com.example.androidproject.ViewModel.MarketVM;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.androidproject.Entities.Market.Market;
@@ -13,18 +12,19 @@ public class MarketViewModel extends ViewModel {
 
     private final MarketRepository repository;
 
-    public MarketViewModel(){
+    public MarketViewModel() {
         repository = MarketRepository.getInstance();
     }
 
-    public void getMarket(String currency, String order, int per_page, String percentageChangeTime, boolean sparkline){
+    public void getMarket(String currency, String order, int per_page, String percentageChangeTime,
+                          boolean sparkline) {
         repository.loadMarket(currency, order, per_page, percentageChangeTime, sparkline);
     }
-    public LiveData<List<Market>> getMarketData(){
+    public LiveData < List < Market >> getMarketData() {
         return repository.getMarketData();
     }
 
-    public LiveData<List<Double>> getSparklineData(String cryptoSymbol){
+    public LiveData < List < Double >> getSparklineData(String cryptoSymbol) {
         return repository.getSparklineData(cryptoSymbol);
     }
 

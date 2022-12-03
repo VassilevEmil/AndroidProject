@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".UI.LineChartFragment"
+    tools:context=".UI.Market.LineChartFragment"
     android:orientation="vertical"
     tools:ignore="MissingDefaultResource">
 
@@ -25,6 +25,8 @@
             android:layout_height="30dp"
             android:background="@drawable/ic_baseline_arrow_back"
             android:drawableTint="@color/teal_700"
+
+
             />
 
         <EditText
@@ -54,9 +56,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/ic_baseline_search"
-
             />
-
 
     </LinearLayout>
 

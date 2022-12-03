@@ -40,12 +40,13 @@ public class NewsDao implements INewsDao {
 
         for(NewsModel item:newsModel){
             if(item.getCreator()==null) {
-                ArrayList<String> localTest = new ArrayList<>();
-                localTest.add("Anonymous");
-                item.setCreator(localTest);
-            };
-
-            myRef.child("News").child(item.getPubDate()).setValue(item);
+//              Since api sometimes returns news with no creators, we must set creator to default
+//              value ourselves, or else it will run into 0 index exception. Here we check when it is
+//              null and then we populate news object first, and then we find creator's path and set
+//              a default value
+                myRef.child("News").child(item.getPubDate()).setValue(item);
+                myRef.child("News").child(item.getPubDate()).child("creator").child("0").setValue("Dread Pirate Roberts");
+            } else myRef.child("News").child(item.getPubDate()).setValue(item);
         }
     }
 

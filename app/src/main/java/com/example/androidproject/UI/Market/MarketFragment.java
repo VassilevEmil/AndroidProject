@@ -59,37 +59,32 @@ public class MarketFragment extends Fragment {
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
+                                       int position, long id) {
                 String currency = spinner.getSelectedItem().toString();
-                viewModel.getMarket(currency, "market_cap_desc", 32, "24h", true);
+                viewModel.getMarket(currency, "market_cap_desc", 30,
+                        "24h", true);
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 //Then nothing, lol
             }
         });
-
         viewModel.getMarketData().observe(getViewLifecycleOwner(), new Observer<List<Market>>() {
             @Override
             public void onChanged(List<Market> markets) {
                 adapter = new MarketAdapter(binding.getRoot().getContext(), markets);
                 recyclerView.setAdapter(adapter);
                 progressBar.setVisibility(View.INVISIBLE);
-
             }
         });
         recyclerView.setLayoutManager(new LinearLayoutManager(binding.getRoot().getContext()));
-
         return root;
     }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
     }
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
