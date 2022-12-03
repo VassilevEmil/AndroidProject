@@ -53,7 +53,7 @@
 
     <fragment
         android:id="@+id/cryptoCharts"
-        android:name="com.example.androidproject.UI.LineChartFragment"
+        android:name="com.example.androidproject.UI.Market.LineChartFragment"
         android:label="Chart"
         tools:layout="@layout/fragment_crypto_chart" />
 

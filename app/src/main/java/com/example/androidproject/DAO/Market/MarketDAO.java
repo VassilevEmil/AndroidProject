@@ -57,10 +57,7 @@ public class MarketDAO implements IMarketDAO{
                  local.add(market);
              }
              marketModel.postValue(local);
-
-
          }
-
          @Override
          public void onCancelled(@NonNull DatabaseError error) {
 
@@ -92,7 +89,6 @@ public class MarketDAO implements IMarketDAO{
                         sparklineModel.postValue(local_);
                     }
                 }
-
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

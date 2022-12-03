@@ -1,4 +1,4 @@
-package com.example.androidproject.UI;
+package com.example.androidproject.UI.Market;
 
 
 import android.content.Context;
@@ -18,23 +18,16 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-
-import com.example.androidproject.Model.Market.MarketAdapter;
-
 import com.example.androidproject.R;
-import com.example.androidproject.ViewModel.Login_RegisterVM.LoginRegisterVM;
 import com.example.androidproject.ViewModel.MarketVM.MarketViewModel;
 import com.example.androidproject.databinding.FragmentCryptoChartBinding;
 
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.FirebaseUser;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.util.List;
 
-import lombok.Data;
 
 
 public class LineChartFragment extends Fragment {
@@ -61,28 +54,33 @@ public class LineChartFragment extends Fragment {
                 searchButt.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                                // HIDES KEYBOARD AFTER BUTTON PRESS, SO USER CAN FOCUS ON THE CHART RIGHT AWAY
-                                InputMethodManager keyboard = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                                keyboard.hideSoftInputFromWindow(text.getWindowToken(), 0);
-                                // HIDES KEYBOARD AFTER BUTTON PRESS, SO USER CAN FOCUS ON THE CHART RIGHT AWAY
-                                viewModel.getSparklineData(text.getText().toString()).observeForever(new Observer<List<Double>>() {
-                                        @Override
-                                        public void onChanged(List<Double> doubles) {
 
-                                                series.resetData(new DataPoint[] {}); // VERY IMPORTANT BEFORE THE FOR LOOP.
-                                                // We clear the data in series, before getting the new one
-                                                for (int i = 0; i < doubles.size(); i++) {
+                                        series.resetData(new DataPoint[]{});
+                                        // HIDES KEYBOARD AFTER BUTTON PRESS,
+                                        // SO USER CAN FOCUS ON THE CHART RIGHT AWAY:
+                                        InputMethodManager keyboard = (InputMethodManager) getActivity()
+                                                .getSystemService(Context.INPUT_METHOD_SERVICE);
+                                        keyboard.hideSoftInputFromWindow(text.getWindowToken(), 0);
+                                        // END
+                                        viewModel.getSparklineData(text.getText().toString())
+                                                .observe(getViewLifecycleOwner(), new Observer<List<Double>>() {
+                                                        @Override
+                                                        public void onChanged(List<Double> doubles) {
+                                                                // VERY IMPORTANT BEFORE THE FOR LOOP:
+                                                                series.resetData(new DataPoint[]{});
+                                                                // We clear the data in series, before getting the new one
 
-                                                        series.appendData(new DataPoint(i, doubles.get(i)), false, doubles.size());
+                                                                for (int i = 0; i < doubles.size(); i++) {
 
-                                                }
+                                                                        series.appendData(new DataPoint(i, doubles
+                                                                                .get(i)), false, doubles.size());
+                                                                }
+                                                        }
+                                                });
+                                }
 
-                                        }
 
-                                });
-                        }
-                });
-
+        });
                 backButton = view.findViewById(R.id.backButton);
 
                 navController = Navigation.findNavController(view);
@@ -100,6 +98,7 @@ public class LineChartFragment extends Fragment {
                                  @Nullable Bundle savedInstanceState) {
 
                 viewModel = new ViewModelProvider(this).get(MarketViewModel.class);
+
                 binding = FragmentCryptoChartBinding.inflate(inflater, container, false);
 
                 View root = binding.getRoot();
