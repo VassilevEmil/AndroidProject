@@ -45,24 +45,6 @@ public class NewsFragment extends Fragment {
         recyclerView = root.findViewById(R.id.recycleviewofNews);
         recyclerView.hasFixedSize();
 
-        // get userId
-
-//        walletViewModel.getCurrentUser().observeForever(new Observer<FirebaseUser>() {
-//            @Override
-//            public void onChanged(FirebaseUser firebaseUser) {
-//                if(firebaseUser != null){
-//                    userID.setText(firebaseUser.getUid());
-//                }else{
-//                    //test until the login will be done
-//
-//                    //viewModel.loginAccount((Activity) root.getContext(),"goformusicro@gmail.com","test1234567");
-//                }
-//
-//               // setLikesList();
-//            }
-//        });
-
-
         viewModel.getNews();
         viewModel.getSearchedNews().observeForever(newsList->{
            adapter = new NewsAdapter(binding.getRoot().getContext(),newsList,viewModel);

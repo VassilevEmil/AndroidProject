@@ -44,6 +44,8 @@ public class NewsRepository {
         return instance;
     }
 
+    // method for searching the news
+
     public void searchForNews(String api, String category, String language){
         NewsApi newsApi = NewsServiceGenerator.getNewsApi();
         Call<NewsResponse> call = newsApi.searchNews(api, category, language);
@@ -51,7 +53,6 @@ public class NewsRepository {
             @Override
             public void onResponse(Call<NewsResponse> call, Response<NewsResponse> response) {
                 if (response.isSuccessful()){
-                   // searchedNews.setValue(response.body().getNews());
                     saveNews(response.body().getNews());
                     System.out.println(response.body().getNews());
                 }
@@ -64,10 +65,13 @@ public class NewsRepository {
             }
         });
     }
+
+    // saving the news
+
     public void saveNews(ArrayList<NewsModel> newsModels){
         newsDao.addNews(newsModels);
         searchedNews = newsDao.getNews();
-       // System.out.println("eeeeeeeeeeeeeeeeeeeeee" + newsDao.getNews());
+
 
     }
 
